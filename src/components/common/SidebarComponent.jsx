@@ -1,13 +1,14 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 const { Sider } = Layout;
 
 const Sidebar = props => {
     return (
         <Sider>
-            <div className="logo" />
+            
             <Menu
                 mode="inline"
                 defaultSelectedKeys={['1']}
@@ -17,7 +18,12 @@ const Sidebar = props => {
                 <Menu.Item key="sorting">
                     <Link to="/">Home</Link>
                 </Menu.Item>
-                <Menu.Item key="2"><Link to="/sorting">Sorting</Link></Menu.Item>
+                <SubMenu
+                    key="sorting"
+                    title={<span><Icon type="project" />Projects</span>}
+                >
+                    <Menu.Item key="4"><Link to="/sorting">Sorting</Link></Menu.Item>
+                </SubMenu>
                 <Menu.Item key="3">nav 3</Menu.Item>
             </Menu>
         </Sider>
