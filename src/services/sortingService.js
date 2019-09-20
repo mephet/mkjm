@@ -1,18 +1,19 @@
 import store from '../store';
 import { updateStepQueue } from '../actions/sortingAction';
 
-export const stepForward = (a, b, destIndex, type) => {
+export const stepForward = (array, sourceIndex, destIndex, type) => {
     const { visualArray } = store.getState().sortingDetails;
+    const sourceValue = array[sourceIndex];
+    // const destValue = array[destIndex];
 
-    if (destIndex !== null)
-        visualArray[destIndex] = a;
+    if (type === 'movement') visualArray[destIndex] = sourceValue;
 
     let postArray = [...visualArray];
 
     let payloadToDispatch = {
         visualArray: postArray,
         stepType: type,
-        stepElements: [a, b]
+        stepElements: [sourceIndex, destIndex]
     }
 
     store.dispatch(updateStepQueue(payloadToDispatch));

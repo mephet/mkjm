@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import { clearStepQueue, clearVisualArray, setVisualArray } from '../actions/sortingAction';
 import { reshuffleArray } from '../services/sortingService';
 import { mergeSortBottomUp } from '../services/mergeSort';
+import { quickSort } from '../services/quickSort';
+import { heapSort } from '../services/heapSort';
 import SortingVisual from '../components/sorting/SortingVisual';
 import ArrayParamSliders from '../components/sorting/ArrayParamSliders';
-import { quickSort } from '../services/quickSort';
+
 
 
 const Sorting = props => {
@@ -60,8 +62,11 @@ const Sorting = props => {
             case 'quicksort':
                 quickSort([...sortingArray], 0, sortingArray.length)
                 break;
+            case 'heapsort':
+                heapSort([...sortingArray])
+                break;
             default:
-                alert('nien!')
+
 
         }
 
@@ -90,6 +95,7 @@ const Sorting = props => {
                     name="mergesort"
                     type={sortingMethod === 'mergesort' ? 'primary' : 'ghost'}
                     size="large"
+                    disabled={isUiDisabled}
                     onClick={(e) => setSortingMethod(e.target.name)}
                 >
                     MergeSort
@@ -98,6 +104,7 @@ const Sorting = props => {
                     name="quicksort"
                     type={sortingMethod === 'quicksort' ? 'primary' : 'ghost'}
                     size="large"
+                    disabled={isUiDisabled}
                     onClick={(e) => setSortingMethod(e.target.name)}
                 >
                     QuickSort
@@ -106,6 +113,7 @@ const Sorting = props => {
                     name="heapsort"
                     type={sortingMethod === 'heapsort' ? 'primary' : 'ghost'}
                     size="large"
+                    disabled={isUiDisabled}
                     onClick={(e) => setSortingMethod(e.target.name)}
                 >
                     HeapSort

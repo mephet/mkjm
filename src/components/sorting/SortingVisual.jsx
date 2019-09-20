@@ -16,10 +16,10 @@ const SortingVisual = props => {
         <div style={sortingVisualStyle}>
             {array.map((num, index) => {
                 if (stepType) {
-                    if (stepElements && stepType === 'comparison' && stepElements.includes(num)) {
+                    if (stepElements && stepType === 'comparison' && stepElements.includes(index)) {
                         return <Bar key={index} length={num} bgc={'yellow'} />
                     }
-                    if (stepElements && stepType === 'movement' && stepElements.includes(num)) {
+                    if (stepElements && stepType === 'movement' && stepElements.includes(index)) {
                         return <Bar key={index} length={num} bgc={'red'} />
                     }
                 }

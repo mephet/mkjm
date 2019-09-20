@@ -10,14 +10,14 @@ const mergeBottomUp = (array, left, step) => {
     for (let i = left; i <= end; i++) {
         if ((array[leftMoving] <= array[rightMoving] || rightMoving > end) &&
             leftMoving < right) {
-            stepForward(array[leftMoving], array[rightMoving], null, 'comparison')
+            stepForward(array, leftMoving, rightMoving, 'comparison')
             buffer[i] = array[leftMoving];
-            stepForward(array[leftMoving], array[i], i, 'movement')
+            stepForward(array, leftMoving, i, 'movement')
             leftMoving++;
         } else {
-            stepForward(array[leftMoving], array[rightMoving], null, 'comparison')
+            stepForward(array, leftMoving, rightMoving, 'comparison')
             buffer[i] = array[rightMoving];
-            stepForward(array[rightMoving], array[i], i, 'movement')
+            stepForward(array, rightMoving, i, 'movement')
             rightMoving++;
         }
 

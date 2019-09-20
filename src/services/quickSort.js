@@ -17,21 +17,19 @@ const partition = (array, pivot, left, right) => {
 
     for (let i = left; i < right; i++) {
         if (array[i] < pivotValue) {
-            stepForward(array[i], pivotValue, null, 'comparison');
-            stepForward(array[i], array[partitionIndex], partitionIndex, 'movement');
-            stepForward(array[partitionIndex], array[i], i, 'movement');
+            stepForward(array, i, pivot, 'comparison');
             swap(array, i, partitionIndex);
             
             partitionIndex++;
         }
     }
-    stepForward(array[partitionIndex], array[right], right, 'movement');
-    stepForward(array[right], array[partitionIndex], partitionIndex, 'movement');
     swap(array, right, partitionIndex);
     return partitionIndex;
 }
 
 const swap = (array, i, j) => {
+    stepForward(array, i, j, 'movement');
+    stepForward(array, j, i, 'movement');
     const temp = array[i];
     array[i] = array[j];
     array[j] = temp;
