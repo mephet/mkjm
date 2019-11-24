@@ -34,8 +34,6 @@ const HeaderSplash = props => {
                 <Button
                     style={styles.headerButtonStyle}
                     type="ghost"
-                    block="false"
-                    component={Link} to="/new/location/"
                 >
                     <Icon type="rocket" theme="twoTone" style={styles.logoStyle} />
                     <Title style={styles.textStyle}>MKJMWorld</Title>

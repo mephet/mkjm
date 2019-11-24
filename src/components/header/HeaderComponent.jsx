@@ -19,8 +19,12 @@ const HeaderComponent = props => {
                 style={styles.headerItemsStyle}
             >
                 
-                <Menu.Item key="sorting">
-                    <Link to="/">Home</Link>
+                <Menu.Item key="about">
+                    <Link to="/about">About</Link>
+                </Menu.Item>
+
+                <Menu.Item key="physics">
+                    <Link to="/physics">Physics</Link>
                 </Menu.Item>
                 
                 <SubMenu
