@@ -18,20 +18,17 @@ const HeaderComponent = props => {
                 mode='horizontal'
                 style={styles.headerItemsStyle}
             >
-                
+
                 <Menu.Item key="about">
                     <Link to="/about">About</Link>
                 </Menu.Item>
 
-                <Menu.Item key="physics">
-                    <Link to="/physics">Physics</Link>
-                </Menu.Item>
-                
                 <SubMenu
                     key="sorting"
                     title={<span><Icon type="project" />Projects</span>}
                 >
                     <Menu.Item key="4"><Link to="/sorting">Sorting</Link></Menu.Item>
+                    <Menu.Item key="physics"><Link to="/physics">Physics</Link></Menu.Item>
                 </SubMenu>
                 <Menu.Item key="github">
                     <Link to="/">Github</Link>
@@ -54,7 +51,7 @@ const styles = {
         lineHeight: '64px',
         float: 'right',
     },
-    
+
 }
 
 

@@ -11,11 +11,9 @@ import { resizeWindow } from './actions/windowAction';
 class App extends React.Component {
 
 	updateDimensions = () => {
-		const { resizeWindow, viewportHeight, viewportWidth } = this.props;
-		console.log(`${window.innerWidth} : ${window.innerHeight}`)
+		const { resizeWindow } = this.props;
+		// console.table(window.innerWidth, window.innerHeight)
 		resizeWindow({ width: window.innerWidth, height: window.innerHeight})
-		console.log(`${viewportHeight} : ${viewportWidth}`)
-		// this.setState({ width: window.innerWidth, height: window.innerHeight });
 	};
 	componentDidMount() {
 		window.addEventListener('resize', this.updateDimensions);
@@ -28,6 +26,7 @@ class App extends React.Component {
 		
 		return (
 			<Router>
+				{/* <h1>{`Viewport dimensions: Width - ${this.props.viewportWidth} : Height - ${this.props.viewportHeight}`}</h1> */}
 				<HeaderComponent />
 				<Layout>
 					<AppRouter />

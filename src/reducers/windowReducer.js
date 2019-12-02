@@ -1,6 +1,6 @@
 const initialState = {
-    viewportWidth: 0,
-    viewportHeight: 0
+    viewportWidth: window.innerWidth,
+    viewportHeight: window.innerHeight
 }
 
 const windowReducer = (state = initialState, action) => {
@@ -8,8 +8,8 @@ const windowReducer = (state = initialState, action) => {
         case 'UPDATE_VIEWPORT_WIDTH_HEIGHT':
             return {
                 ...state,
-                viewportHeight: action.payload.width,
-                viewportWidth: action.payload.height,
+                viewportHeight: action.payload.height,
+                viewportWidth: action.payload.width,
             }
         default:
             return state;
