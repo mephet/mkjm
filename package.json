@@ -5,10 +5,12 @@
   "dependencies": {
     "@material-ui/core": "^4.4.0",
     "antd": "^3.23.2",
+    "antd-mobile": "^2.3.1",
     "bootstrap": "^4.3.1",
     "matter-js": "^0.14.2",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
+    "react-device-detect": "^1.11.14",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",

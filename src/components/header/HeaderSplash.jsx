@@ -6,22 +6,21 @@ const { Title } = Typography;
 
 const styles = {
     headerSplash: {
-        height: 50
+        flex: 1
     },
     headerButtonStyle: {
         display: 'flex',
-        width: '100%',
-        height: '100%',
+        // width: '100%',
+        // height: '100%',
         backgroundColo: 'darkblue',
     },
     logoStyle: {
         flex: 1,
-        fontSize: '30px',
+        fontSize: '20px',
     },
     textStyle: {
         flex: 1,
         fontSize: '20px',
-        marginTop: 8,
         color: 'white',
     }
 

@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Sorting from '../pages/Sorting';
 import About from '../pages/About';
 import Physics from '../pages/Physics';
+import Encryption from '../pages/Encryption';
 
 const { Content } = Layout;
 
@@ -15,6 +16,7 @@ const AppRouter = () => {
             <Route path='/sorting' component={Sorting} />
             <Route path='/about' component={About} />
             <Route path='/physics' component={Physics} />
+            <Route path='/encryption' component={Encryption} />
         </Content>
     )
 }

@@ -1,9 +1,6 @@
-import React from 'react';
 import Matter from 'matter-js';
 
 const mEngine = props => {
-
-    const { flipGravity } = props;
 
     const Engine = Matter.Engine,
         Render = Matter.Render,
