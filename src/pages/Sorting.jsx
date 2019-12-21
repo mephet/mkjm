@@ -9,6 +9,7 @@ import { quickSort } from '../services/quickSort';
 import { heapSort } from '../services/heapSort';
 import SortingVisual from '../components/sorting/SortingVisual';
 import ArrayParamSliders from '../components/sorting/ArrayParamSliders';
+import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 
 
 
@@ -23,16 +24,21 @@ const Sorting = props => {
         stepDelay: 30,
         sortingArray: [],
         currentVisual: {},
+        isSortButtonDisabled: true,
         isVisualButtonDisabled: true,
         isUiDisabled: false
     }
+
+    const maxStepDelay = isMobile ? 300 : 300
+    const maxArraySize = isMobile ? 50 : 100
 
     const [sortingMethod, setSortingMethod] = useState(initialState.sortingMethod);
     const [arraySize, setArraySize] = useState(initialState.arraySize);
     const [sortingArray, setSortingArray] = useState(initialState.sortingArray);
     const [currentVisual, setCurrentVisual] = useState(initialState.currentVisual);
     const [stepDelay, setStepDelay] = useState(initialState.stepDelay);
-    const [isVisualButtonDisabled, setIsVisualButtonDisabled] = useState(initialState.isVisualButtonDisabled);
+    const [isSortButtonDisabled, setSortButtonDisabled] = useState(initialState.isSortButtonDisabled);
+    const [isVisualButtonDisabled, setVisualButtonDisabled] = useState(initialState.isVisualButtonDisabled);
     const [isUiDisabled, setIsUiDisabled] = useState(initialState.isUiDisabled)
 
     const resetScenario = () => {
@@ -40,7 +46,8 @@ const Sorting = props => {
         clearStepQueue();
         setSortingArray([]);
         clearVisualArray();
-        setIsVisualButtonDisabled(true);
+        setSortButtonDisabled(true)
+        setVisualButtonDisabled(true);
     }
 
     const generateNewArray = (size) => {
@@ -51,6 +58,7 @@ const Sorting = props => {
         const startingVisual = { visualArray: newArray, }
         setVisualArray(newArray);
         setCurrentVisual(startingVisual);
+        setSortButtonDisabled(false);
     }
 
     const startSort = () => {
@@ -66,11 +74,13 @@ const Sorting = props => {
                 heapSort([...sortingArray])
                 break;
             default:
-
-
         }
+        setVisualButtonDisabled(false);
+    }
 
-        setIsVisualButtonDisabled(false);
+    const selectSortingMethod = (method) => {
+        resetScenario();
+        setSortingMethod(method);
     }
 
     const beginVisualisation = async (stepDelay) => {
@@ -84,7 +94,6 @@ const Sorting = props => {
             setCurrentVisual(stepQueue[index])
             await sleep(stepDelay)
         }
-
         setIsUiDisabled(false);
     }
 
@@ -96,7 +105,7 @@ const Sorting = props => {
                     type={sortingMethod === 'mergesort' ? 'primary' : 'ghost'}
                     size="large"
                     disabled={isUiDisabled}
-                    onClick={(e) => setSortingMethod(e.target.name)}
+                    onClick={(e) => selectSortingMethod(e.target.name)}
                 >
                     MergeSort
                 </Button>
@@ -105,7 +114,7 @@ const Sorting = props => {
                     type={sortingMethod === 'quicksort' ? 'primary' : 'ghost'}
                     size="large"
                     disabled={isUiDisabled}
-                    onClick={(e) => setSortingMethod(e.target.name)}
+                    onClick={(e) => selectSortingMethod(e.target.name)}
                 >
                     QuickSort
                 </Button>
@@ -114,13 +123,20 @@ const Sorting = props => {
                     type={sortingMethod === 'heapsort' ? 'primary' : 'ghost'}
                     size="large"
                     disabled={isUiDisabled}
-                    onClick={(e) => setSortingMethod(e.target.name)}
+                    onClick={(e) => selectSortingMethod(e.target.name)}
                 >
                     HeapSort
                 </Button>
             </div>
             <br />
-            <ArrayParamSliders isDisabled={isUiDisabled} arraySize={arraySize} generateNewArray={generateNewArray} stepDelay={stepDelay} setStepDelay={setStepDelay} />
+            <ArrayParamSliders
+                isDisabled={isUiDisabled}
+                arraySize={arraySize}
+                generateNewArray={generateNewArray}
+                stepDelay={stepDelay}
+                setStepDelay={setStepDelay}
+                maxArraySize={maxArraySize}
+                maxStepDelay={maxStepDelay} />
             <br />
             <div>
                 <Button
@@ -135,7 +151,7 @@ const Sorting = props => {
                     name="sort"
                     type="primary"
                     ghost
-                    disabled={isUiDisabled}
+                    disabled={isSortButtonDisabled || isUiDisabled}
                     onClick={() => startSort()}
                 >
                     Sort
@@ -153,15 +169,26 @@ const Sorting = props => {
             </div>
             <br />
             <br />
-            <SortingVisual array={visualArray} />
-            <br />
-            {(currentVisual.visualArray) ? <SortingVisual stepType={currentVisual.stepType} stepElements={currentVisual.stepElements} array={currentVisual.visualArray} /> : null}
+            <BrowserView>
+                <SortingVisual array={visualArray} />
+                <br />
+                {(currentVisual.visualArray) ?
+                    <SortingVisual stepType={currentVisual.stepType} stepElements={currentVisual.stepElements} array={currentVisual.visualArray} />
+                    : null}
+            </BrowserView>
+            <MobileView>
+                <SortingVisual array={visualArray} />
+                <br />
+                {(currentVisual.visualArray) ?
+                    <SortingVisual stepType={currentVisual.stepType} stepElements={currentVisual.stepElements} array={currentVisual.visualArray} />
+                    : null}
+            </MobileView>
         </div >
     )
 }
 
 const containerStyle = {
-    padding: 50
+    padding: '1rem'
 }
 
 const selectionBarStyle = {

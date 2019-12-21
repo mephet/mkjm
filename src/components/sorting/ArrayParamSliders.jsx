@@ -2,7 +2,7 @@ import React from 'react';
 import { Slider, Row, Col, InputNumber } from 'antd';
 
 const ArrayParamSliders = props => {
-    const { arraySize, generateNewArray, stepDelay, setStepDelay, isDisabled } = props;
+    const { arraySize, generateNewArray, stepDelay, setStepDelay, isDisabled, maxArraySize, maxStepDelay } = props;
 
     return (
         <div>
@@ -13,7 +13,7 @@ const ArrayParamSliders = props => {
                 <Col span={12}>
                     <Slider
                         min={1}
-                        max={100}
+                        max={maxArraySize}
                         disabled={isDisabled}
                         onChange={generateNewArray}
                         value={arraySize}
@@ -22,7 +22,7 @@ const ArrayParamSliders = props => {
                 <Col span={4}>
                     <InputNumber
                         min={1}
-                        max={100}
+                        max={maxArraySize}
                         disabled={isDisabled}
                         style={{ marginLeft: 16 }}
                         value={arraySize}
@@ -37,7 +37,7 @@ const ArrayParamSliders = props => {
                 <Col span={12}>
                     <Slider
                         min={1}
-                        max={500}
+                        max={maxStepDelay}
                         disabled={isDisabled}
                         onChange={setStepDelay}
                         value={stepDelay}
@@ -46,7 +46,7 @@ const ArrayParamSliders = props => {
                 <Col span={4}>
                     <InputNumber
                         min={1}
-                        max={500}
+                        max={maxStepDelay}
                         disabled={isDisabled}
                         style={{ marginLeft: 16 }}
                         value={stepDelay}

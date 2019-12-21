@@ -1,28 +1,25 @@
 import React from 'react';
-import { Jumbotron, Button } from 'react-bootstrap';
+import { Card } from 'antd';
 
 const HomeComponent1 = props => {
 
     return (
-        <Jumbotron style={styles.jumbotronStyle}>
-            <h1>Hello, world!</h1>
-            <p>
-                This is a simple hero unit, a simple jumbotron-style component for calling
-                extra attention to featured content or information.
-                    </p>
-            <p>
-                <Button variant="primary">Learn more</Button>
-            </p>
-        </Jumbotron>
+        <div>
+            <Card title="Card title" bordered={true} style={styles.containerStyle} >
+                <p>dsfasdfajfoasidjfoasdfosandfnasdifnoasifdndaofinasonaosdfinasokdcnacnliawn</p>
+                <p>Card content</p>
+                <p>Card content</p>
+            </Card>
+        </div>
     )
 }
 
 const styles = {
-    jumbotronStyle: {
+    containerStyle: {
         height: '90%',
         width: '100%',
-        // marginBottom: '10%'
+        background: '#ECECEC',
     }
 }
 
-export default HomeComponent1
+export default HomeComponent1;

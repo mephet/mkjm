@@ -10,6 +10,7 @@ import Encryption from '../pages/Encryption';
 const { Content } = Layout;
 
 const AppRouter = () => {
+
     return (
         <Content>
             <Route path='/' exact component={Home} />

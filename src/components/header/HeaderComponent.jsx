@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import { BrowserView, MobileView } from 'react-device-detect';
+import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import { Layout, Dropdown, Menu, Icon } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import HeaderSplash from './HeaderSplash';
@@ -10,17 +10,13 @@ const { Header } = Layout;
 
 const HeaderComponent = props => {
 
-    const [isDocked, setIsDocked] = useState(true);
-
-    const onOpenChange = (...args) => {
-        console.log(...args)
-        setIsDocked(!isDocked)
-    }
+    const mode = isMobile ? 'vertical' : 'horizontal'
+    console.log(mode)
 
     const menu = (
         <Menu
             theme='dark'
-            mode='horizontal'
+            mode={mode}
             style={styles.headerItemsStyle}
         >
 
@@ -29,7 +25,7 @@ const HeaderComponent = props => {
             </Menu.Item>
 
             <SubMenu
-                key="sorting"
+                key="project"
                 title={<span><Icon type="project" />Projects</span>}
             >
                 <Menu.Item key="sorting"><Link to="/sorting">Sorting</Link></Menu.Item>
@@ -65,11 +61,13 @@ const HeaderComponent = props => {
 const styles = {
     headerStyle: {
         width: '100%',
-        height: 70,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'fixed',
+        zIndex: 1,
+        width: '100%'
     },
     headerItemsStyle: {
         lineHeight: '64px',

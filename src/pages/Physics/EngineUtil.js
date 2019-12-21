@@ -4,10 +4,10 @@ const mEngine = props => {
 
     const Engine = Matter.Engine,
         Render = Matter.Render,
-        World = Matter.World,
-        Bodies = Matter.Bodies,
-        Mouse = Matter.Mouse,
-        MouseConstraint = Matter.MouseConstraint
+        World = Matter.World
+        // Bodies = Matter.Bodies,
+        // Mouse = Matter.Mouse,
+        // MouseConstraint = Matter.MouseConstraint
 
     const engine = Engine.create({
 

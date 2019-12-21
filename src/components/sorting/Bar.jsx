@@ -6,9 +6,8 @@ const Bar = props => {
 
     let styles = {
         height: length,
-        margin: 3,
+        margin: '0.15rem',
         width: '100%',
-        maxWidth: '20%',
         backgroundColor: bgc
     }
 

@@ -15,7 +15,6 @@ const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homep
 
 const Home = () => {
 
-
     let parallax = null;
 
     const styles = {
@@ -29,11 +28,14 @@ const Home = () => {
         },
         p1ForeStyle: {
             opacity: 1
+        },
+        containerStyle: {
+            flex: 1
         }
     }
 
     return (
-        <Parallax pages={3} ref={ref => (parallax = ref)}>
+        <Parallax pages={3} ref={ref => (parallax = ref)} style={styles.containerStyle}>
             <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
             <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 
@@ -87,6 +89,7 @@ const Home = () => {
                 <img src={url('clients-main')} style={{ width: '40%' }} />
             </ParallaxLayer>
         </Parallax >
+
     )
 
 }
