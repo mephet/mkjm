@@ -2,26 +2,35 @@ import React, { useState } from 'react';
 import { Button } from 'antd'
 import { connect } from 'react-redux';
 
-import { clearStepQueue, clearVisualArray, setVisualArray } from '../actions/sortingAction';
-import { reshuffleArray } from '../services/sortingService';
-import { mergeSortBottomUp } from '../services/mergeSort';
-import { quickSort } from '../services/quickSort';
-import { heapSort } from '../services/heapSort';
-import SortingVisual from '../components/sorting/SortingVisual';
-import ArrayParamSliders from '../components/sorting/ArrayParamSliders';
+import { clearStepQueue, clearVisualArray, setVisualArray } from '../../actions/sortingAction';
+import { reshuffleArray } from '../../services/sortingService';
+import { mergeSortBottomUp } from '../../services/mergeSort';
+import { quickSort } from '../../services/quickSort';
+import { heapSort } from '../../services/heapSort';
+import SortingVisual from '../../components/sorting/SortingVisual';
+import ArrayParamSliders from '../../components/sorting/ArrayParamSliders';
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 
-
-
 const Sorting = props => {
+
+    const MIN_HEIGHT = 1;
+    const MAX_HEIGHT = 300;
+    const MAX_ARRAY_SIZE_MOBILE = 50;
+    const MAX_ARRAY_SIZE = 100;
+    const MAX_STEP_DELAY = 300;
+    const INITIAL_ARRAY_SIZE = 30;
+    const INITIAL_STEP_DELAY = 30;
+    const MERGESORT_SELECTION = 'MergeSort';
+    const QUICKSORT_SELECTION = 'QuickSort';
+    const HEAPSORT_SELECTION = 'HeapSort';
 
     const { visualArray, setVisualArray, clearVisualArray,
         stepQueue, clearStepQueue } = props;
 
     const initialState = {
-        sortingMethod: 'mergesort',
-        arraySize: 50,
-        stepDelay: 30,
+        sortingMethod: MERGESORT_SELECTION,
+        arraySize: INITIAL_ARRAY_SIZE,
+        stepDelay: INITIAL_STEP_DELAY,
         sortingArray: [],
         currentVisual: {},
         isSortButtonDisabled: true,
@@ -29,8 +38,8 @@ const Sorting = props => {
         isUiDisabled: false
     }
 
-    const maxStepDelay = isMobile ? 300 : 300
-    const maxArraySize = isMobile ? 50 : 100
+    const maxStepDelay = isMobile ? MAX_STEP_DELAY : MAX_STEP_DELAY;
+    const maxArraySize = isMobile ? MAX_ARRAY_SIZE_MOBILE : MAX_ARRAY_SIZE;
 
     const [sortingMethod, setSortingMethod] = useState(initialState.sortingMethod);
     const [arraySize, setArraySize] = useState(initialState.arraySize);
@@ -39,7 +48,7 @@ const Sorting = props => {
     const [stepDelay, setStepDelay] = useState(initialState.stepDelay);
     const [isSortButtonDisabled, setSortButtonDisabled] = useState(initialState.isSortButtonDisabled);
     const [isVisualButtonDisabled, setVisualButtonDisabled] = useState(initialState.isVisualButtonDisabled);
-    const [isUiDisabled, setIsUiDisabled] = useState(initialState.isUiDisabled)
+    const [isUiDisabled, setIsUiDisabled] = useState(initialState.isUiDisabled);
 
     const resetScenario = () => {
         setCurrentVisual({});
@@ -53,7 +62,7 @@ const Sorting = props => {
     const generateNewArray = (size) => {
         resetScenario();
         setArraySize(size);
-        const newArray = reshuffleArray(size, 1, 300)
+        const newArray = reshuffleArray(size, MIN_HEIGHT, MAX_HEIGHT)
         setSortingArray(newArray);
         const startingVisual = { visualArray: newArray, }
         setVisualArray(newArray);
@@ -64,13 +73,13 @@ const Sorting = props => {
     const startSort = () => {
 
         switch (sortingMethod) {
-            case 'mergesort':
+            case MERGESORT_SELECTION:
                 mergeSortBottomUp([...sortingArray]);
                 break;
-            case 'quicksort':
+            case QUICKSORT_SELECTION:
                 quickSort([...sortingArray], 0, sortingArray.length)
                 break;
-            case 'heapsort':
+            case HEAPSORT_SELECTION:
                 heapSort([...sortingArray])
                 break;
             default:
@@ -98,34 +107,34 @@ const Sorting = props => {
     }
 
     return (
-        <div style={containerStyle}>
-            <div style={selectionBarStyle}>
+        <div style={styles.containerStyle}>
+            <div style={styles.selectionBarStyle}>
                 <Button
-                    name="mergesort"
-                    type={sortingMethod === 'mergesort' ? 'primary' : 'ghost'}
+                    name={MERGESORT_SELECTION}
+                    type={sortingMethod === MERGESORT_SELECTION ? 'primary' : 'ghost'}
                     size="large"
                     disabled={isUiDisabled}
                     onClick={(e) => selectSortingMethod(e.target.name)}
                 >
-                    MergeSort
+                    {MERGESORT_SELECTION}
                 </Button>
                 <Button
-                    name="quicksort"
-                    type={sortingMethod === 'quicksort' ? 'primary' : 'ghost'}
+                    name={QUICKSORT_SELECTION}
+                    type={sortingMethod === QUICKSORT_SELECTION ? 'primary' : 'ghost'}
                     size="large"
                     disabled={isUiDisabled}
                     onClick={(e) => selectSortingMethod(e.target.name)}
                 >
-                    QuickSort
+                    {QUICKSORT_SELECTION}
                 </Button>
                 <Button
-                    name="heapsort"
-                    type={sortingMethod === 'heapsort' ? 'primary' : 'ghost'}
+                    name={HEAPSORT_SELECTION}
+                    type={sortingMethod === HEAPSORT_SELECTION ? 'primary' : 'ghost'}
                     size="large"
                     disabled={isUiDisabled}
                     onClick={(e) => selectSortingMethod(e.target.name)}
                 >
-                    HeapSort
+                    {HEAPSORT_SELECTION}
                 </Button>
             </div>
             <br />
@@ -187,14 +196,16 @@ const Sorting = props => {
     )
 }
 
-const containerStyle = {
-    padding: '1rem'
-}
-
-const selectionBarStyle = {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+const styles = {
+    containerStyle: {
+        padding: '1rem',
+        marginTop: '64px'
+    },
+    selectionBarStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    }
 }
 
 const mapStateToProps = state => {

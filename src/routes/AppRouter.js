@@ -6,6 +6,7 @@ import Sorting from '../pages/Sorting';
 import About from '../pages/About';
 import Physics from '../pages/Physics';
 import Encryption from '../pages/Encryption';
+import Projects from '../pages/Projects';
 
 const { Content } = Layout;
 
@@ -14,10 +15,11 @@ const AppRouter = () => {
     return (
         <Content>
             <Route path='/' exact component={Home} />
-            <Route path='/sorting' component={Sorting} />
-            <Route path='/about' component={About} />
-            <Route path='/physics' component={Physics} />
-            <Route path='/encryption' component={Encryption} />
+            <Route path='/projects/sorting' exact component={Sorting} />
+            <Route path='/about' exact component={About} />
+            <Route path='/projects/physics' exact component={Physics} />
+            <Route path='/projects' exact component={Projects} />
+            <Route path='/projects/encryption' exact component={Encryption} />
         </Content>
     )
 }

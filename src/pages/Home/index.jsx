@@ -1,6 +1,7 @@
 import React from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
 import HomeComponent1 from './HomeComponent1';
+import HomeComponent2 from './HomeComponent2';
 
 
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -11,8 +12,6 @@ const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homep
 // const Blue = ({ children }) => <span style={{ color: '#57C7FF' }}>{children}</span>
 // const Gray = ({ children }) => <span style={{ color: '#909090' }}>{children}</span>
 
-
-
 const Home = () => {
 
     let parallax = null;
@@ -20,57 +19,60 @@ const Home = () => {
     const styles = {
         p1Style: {
             display: 'flex',
-            alignItem: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
             justifyContent: 'center',
-            backgroundImage: `url(${url('server')})`,
-            backgroundPosition: 'center',
-            backgroundSize: '50% 50%',
         },
         p1ForeStyle: {
             opacity: 1
         },
-        containerStyle: {
-            flex: 1
-        }
     }
 
     return (
-        <Parallax pages={3} ref={ref => (parallax = ref)} style={styles.containerStyle}>
-            <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
-            <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
+        <Parallax pages={3} ref={ref => (parallax = ref)} >
+            <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} alt="background" />
+            <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} alt="background" />
 
             <ParallaxLayer
                 offset={0}
                 speed={0.1}
                 onClick={() => parallax.scrollTo(1)}
                 style={styles.p1Style}>
+                <img src={process.env.PUBLIC_URL + '/resources/bg1.jpeg'} style={{ width: '100%', height: '100%' }} alt="background 1"></img>
+            </ParallaxLayer>
+
+            <ParallaxLayer
+                offset={0}
+                speed={0.5}
+                onClick={() => parallax.scrollTo(1)}
+                style={styles.p1Style}>
                 <HomeComponent1 />
             </ParallaxLayer>
 
             <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
-                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
-                <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '55%' }} alt="parallax cloud" />
+                <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '15%' }} alt="parallax cloud" />
             </ParallaxLayer>
 
             <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
-                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
-                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
+                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '70%' }} alt="parallax cloud" />
+                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '40%' }} alt="parallax cloud" />
             </ParallaxLayer>
 
             <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
-                <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
-                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} />
+                <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '10%' }} alt="parallax cloud" />
+                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '75%' }} alt="parallax cloud" />
             </ParallaxLayer>
 
             <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
-                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} />
-                <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
-                <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
+                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '60%' }} alt="parallax cloud" />
+                <img src={url('cloud')} style={{ display: 'block', width: '25%', marginLeft: '30%' }} alt="parallax cloud" />
+                <img src={url('cloud')} style={{ display: 'block', width: '10%', marginLeft: '80%' }} alt="parallax cloud" />
             </ParallaxLayer>
 
             <ParallaxLayer offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
-                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
-                <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '75%' }} />
+                <img src={url('cloud')} style={{ display: 'block', width: '20%', marginLeft: '5%' }} alt="parallax cloud" />
+                <img src={url('cloud')} style={{ display: 'block', width: '15%', marginLeft: '75%' }} alt="parallax cloud" />
             </ParallaxLayer>
 
             <ParallaxLayer
@@ -78,7 +80,8 @@ const Home = () => {
                 speed={0.1}
                 onClick={() => parallax.scrollTo(2)}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img src={url('bash')} style={{ width: '40%' }} />
+                {/* <img src={url('bash')} style={{ width: '40%' }} /> */}
+                <HomeComponent2 />
             </ParallaxLayer>
 
             <ParallaxLayer
@@ -86,7 +89,7 @@ const Home = () => {
                 speed={-0}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 onClick={() => parallax.scrollTo(0)}>
-                <img src={url('clients-main')} style={{ width: '40%' }} />
+                {/* <img src={url('clients-main')} style={{ width: '40%' }} /> */}
             </ParallaxLayer>
         </Parallax >
 

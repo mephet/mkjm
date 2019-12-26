@@ -10,8 +10,6 @@ const styles = {
     },
     headerButtonStyle: {
         display: 'flex',
-        // width: '100%',
-        // height: '100%',
         backgroundColo: 'darkblue',
     },
     logoStyle: {

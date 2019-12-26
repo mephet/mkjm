@@ -1,15 +1,21 @@
 import React from 'react';
+import { Typography } from 'antd';
 
-class About extends React.Component {
+const { Title } = Typography;
 
-    render() {
-        return (
-            <div>
-                <h1>This is the about page</h1>
-                {/* <span>Window size: {this.state.width} x {this.state.height}</span> */}
-            </div>
-        )
+const About = () => {
+
+    const styles = {
+        containerStyle: {
+            marginTop: '64px',
+        }
     }
+
+    return (
+        <div style={styles.containerStyle}>
+            <Title>This is the about page</Title>
+        </div>
+    )
 
 }
 

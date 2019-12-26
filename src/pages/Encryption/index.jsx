@@ -1,47 +1,29 @@
 import React from 'react';
-import AES from './AES';
+import Sketch from 'react-p5';
+import { setup, draw } from './sketch';
 
-class Encryption extends React.Component {
+const Encryption = () => {
 
-    constructor(props) {
-        super(props)
-
-        let exampleText = "aa";
-        
-        let hexConvertedText = AES.toByteArray(exampleText);
-
-        this.state = {
-            exampleText: exampleText,
-            hexConvertedText: hexConvertedText
+    const styles = {
+        containerStyle: {
+            marginTop: '64px'
         }
     }
 
-    render() {
-        let styles = {
-            containerStyle: {
-                display: "flex",
-                width: "600px",
-                flexWrap: "wrap"
-            },
-            itemStyle: {
-                minWidth: `${100 / 4}%`,
-                textAlign: "center",
-                border: "1px solid black",
-                boxSizing: "border-box"
-            }
-        }
+    // const setup = (p5, parentCanvasRef) => {
+    //     p5.createCanvas(window.innerWidth, window.innerHeight - 67).parent(parentCanvasRef);
+    // }
 
-        return (
-            <div>
-                <h1>Encryption Page</h1>
-                <h3>Example Text: {this.state.exampleText}</h3>
-                <h3>Byte Array: {this.state.hexConvertedText}</h3>
-                {/* <div style={styles.containerStyle}>
-                    {data.map(elem => <div style={styles.itemStyle}>{elem}</div>)}
-                </div> */}
-            </div >
-        )
-    }
+    // const draw = p5 => {
+    //     p5.background(0);
+    //     p5.ellipse(50, 50, 80, 80)
+    // }
+
+    return (
+        <div style={styles.containerStyle}>
+            <Sketch setup={setup} draw={draw} />
+        </div>
+    )
 
 }
 

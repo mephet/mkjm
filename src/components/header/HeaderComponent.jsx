@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, withRouter } from "react-router-dom";
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
-import { Layout, Dropdown, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Drawer, Button } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import HeaderSplash from './HeaderSplash';
 
@@ -10,8 +10,17 @@ const { Header } = Layout;
 
 const HeaderComponent = props => {
 
-    const mode = isMobile ? 'vertical' : 'horizontal'
-    console.log(mode)
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const mode = isMobile ? 'vertical' : 'horizontal';
+
+    const routeToProjectsPage = () => {
+        props.history.push('/projects')
+
+    }
+
+    const toggleMobileMenuOpen = () => {
+        setMobileMenuOpen(!isMobileMenuOpen)
+    }
 
     const menu = (
         <Menu
@@ -26,11 +35,12 @@ const HeaderComponent = props => {
 
             <SubMenu
                 key="project"
+                onTitleClick={routeToProjectsPage}
                 title={<span><Icon type="project" />Projects</span>}
             >
-                <Menu.Item key="sorting"><Link to="/sorting">Sorting</Link></Menu.Item>
-                <Menu.Item key="physics"><Link to="/physics">Physics</Link></Menu.Item>
-                <Menu.Item key="encryption"><Link to="/encryption">Encryption</Link></Menu.Item>
+                <Menu.Item key="sorting"><Link to="/projects/sorting">Sorting</Link></Menu.Item>
+                <Menu.Item key="physics"><Link to="/projects/physics">Physics</Link></Menu.Item>
+                <Menu.Item key="encryption"><Link to="/projects/encryption">Encryption</Link></Menu.Item>
             </SubMenu>
             <Menu.Item key="github">
                 <Link to="/">Github</Link>
@@ -38,8 +48,31 @@ const HeaderComponent = props => {
         </Menu>
     )
 
+    const mobileMenu = (
+        <Drawer
+            title='StudentCon'
+            placement='left'
+            closable={true}
+            onClose={toggleMobileMenuOpen}
+            visible={isMobileMenuOpen}
+        >
+            <Menu>
+                <Menu.Item key="about">
+                    <Link to="/about">About</Link>
+                </Menu.Item>
+                <Menu.Item key="projects">
+                    <Link to="/projects">Projects</Link>
+                </Menu.Item>
+                <Menu.Item key="github">
+                    <Link to="/">Github</Link>
+                </Menu.Item>
+            </Menu>
+        </Drawer>
+    )
+
     return (
         <div>
+            {mobileMenu}
             <BrowserView>
                 <Header style={styles.headerStyle}>
                     <HeaderSplash />
@@ -49,9 +82,15 @@ const HeaderComponent = props => {
             <MobileView>
                 <Header style={styles.headerStyle}>
                     <HeaderSplash />
-                    <Dropdown style={styles.mobileStyles.dropdownStyle} overlay={menu} trigger={['click']}>
+                    <Button
+                        type="primary"
+                        ghost
+                        icon="menu"
+                        style={styles.mobileStyles.buttonDrawerStyle}
+                        onClick={toggleMobileMenuOpen} />
+                    {/* <Dropdown style={styles.mobileStyles.dropdownStyle} overlay={menu} trigger={['click']}>
                         <Icon style={styles.mobileStyles.iconStyle} type="menu" />
-                    </Dropdown>
+                    </Dropdown> */}
                 </Header>
             </MobileView>
         </div >
@@ -67,22 +106,17 @@ const styles = {
         alignItems: 'center',
         position: 'fixed',
         zIndex: 1,
-        width: '100%'
     },
     headerItemsStyle: {
         lineHeight: '64px',
         float: 'right',
     },
     mobileStyles: {
-        dropdownStyle: {
-            flex: 1
-        },
-        iconStyle: {
+        buttonDrawerStyle: {
             color: 'white',
-            fontSize: '20px'
-        }
+        },
     }
 }
 
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);

@@ -1,25 +1,28 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Typography } from 'antd';
 
 const HomeComponent1 = props => {
 
     return (
-        <div>
-            <Card title="Card title" bordered={true} style={styles.containerStyle} >
-                <p>dsfasdfajfoasidjfoasdfosandfnasdifnoasifdndaofinasonaosdfinasokdcnacnliawn</p>
-                <p>Card content</p>
-                <p>Card content</p>
-            </Card>
-        </div>
+        <Typography.Text style={styles.textStyle}>
+            Change your thoughts and you change your world
+            <br />
+            &emsp;&emsp; - Norman Vincent Peale
+        </Typography.Text>
     )
 }
 
 const styles = {
-    containerStyle: {
-        height: '90%',
-        width: '100%',
-        background: '#ECECEC',
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: '5vw',
+        fontFamily: 'Indie Flower',
+        paddingLeft: '10vw',
+        paddingRight: '10vw'
     }
 }
+
+
 
 export default HomeComponent1;

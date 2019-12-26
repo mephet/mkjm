@@ -10,15 +10,6 @@ class App extends React.Component {
 
 	render() {
 
-		const styles = {
-			layoutStyle: {
-				height: '100%'
-			},
-			headerStyle: {
-				height: 1
-			}
-		}
-
 		return (
 			<Router>
 				<Layout >
