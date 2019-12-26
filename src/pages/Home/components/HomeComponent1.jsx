@@ -14,6 +14,7 @@ const HomeComponent1 = props => {
 
 const styles = {
     textStyle: {
+        flex: 2,
         color: 'white',
         fontWeight: 'bold',
         fontSize: '5vw',

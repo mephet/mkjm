@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import Sorting from '../pages/Sorting';
 import About from '../pages/About';
 import Physics from '../pages/Physics';
-import Encryption from '../pages/Encryption';
+import Rose from '../pages/Rose';
 import Projects from '../pages/Projects';
 
 const { Content } = Layout;
@@ -19,7 +19,7 @@ const AppRouter = () => {
             <Route path='/about' exact component={About} />
             <Route path='/projects/physics' exact component={Physics} />
             <Route path='/projects' exact component={Projects} />
-            <Route path='/projects/encryption' exact component={Encryption} />
+            <Route path='/projects/rose' exact component={Rose} />
         </Content>
     )
 }

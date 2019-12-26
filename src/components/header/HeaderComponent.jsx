@@ -40,7 +40,7 @@ const HeaderComponent = props => {
             >
                 <Menu.Item key="sorting"><Link to="/projects/sorting">Sorting</Link></Menu.Item>
                 <Menu.Item key="physics"><Link to="/projects/physics">Physics</Link></Menu.Item>
-                <Menu.Item key="encryption"><Link to="/projects/encryption">Encryption</Link></Menu.Item>
+                <Menu.Item key="rose"><Link to="/projects/rose">Rose Function</Link></Menu.Item>
             </SubMenu>
             <Menu.Item key="github">
                 <Link to="/">Github</Link>
@@ -50,7 +50,7 @@ const HeaderComponent = props => {
 
     const mobileMenu = (
         <Drawer
-            title='StudentCon'
+            title='Navigation'
             placement='left'
             closable={true}
             onClose={toggleMobileMenuOpen}
@@ -88,9 +88,6 @@ const HeaderComponent = props => {
                         icon="menu"
                         style={styles.mobileStyles.buttonDrawerStyle}
                         onClick={toggleMobileMenuOpen} />
-                    {/* <Dropdown style={styles.mobileStyles.dropdownStyle} overlay={menu} trigger={['click']}>
-                        <Icon style={styles.mobileStyles.iconStyle} type="menu" />
-                    </Dropdown> */}
                 </Header>
             </MobileView>
         </div >

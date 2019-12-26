@@ -8,33 +8,40 @@ const Projects = props => {
         containerStyle: {
             marginTop: '64px',
             padding: '1rem'
+        },
+        imgStyle: {
+            maxWidth: '100%',
+            maxHeight: '24em',
         }
     }
 
 
     return (
         <div style={styles.containerStyle}>
-            <Row gutter={16}>
-                <Col span={8}>
+            <Row gutter={[16, 16]}>
+                <Col xs={24} sm={12} md={8} lg={8}>
                     <Link to='/projects/sorting'>
                         <Card
                             title="Sorting"
                             bordered={true}
                             hoverable
-                            cover={<img alt="sorting card cover" src={process.env.PUBLIC_URL + '/resources/sorting_card_screen.jpg'}></img>}>
+                            cover={<img style={styles.imgStyle} alt="sorting card cover" src={process.env.PUBLIC_URL + '/resources/sorting_card_screen.jpg'}></img>}>
                             <p>A simple visualisation for sorting an array of elements using some popular sorting techniques</p>
                         </Card>
                     </Link>
                 </Col>
-                <Col span={8}>
-                    <Card
-                        title="Encryption"
-                        bordered={true}
-                        hoverable>
-                        Card content
+                <Col xs={24} sm={12} md={8} lg={8}>
+                    <Link to='/projects/rose'>
+                        <Card
+                            title="Rose Function"
+                            bordered={true}
+                            hoverable
+                            cover={<img style={styles.imgStyle} alt="rose card cover" src={process.env.PUBLIC_URL + '/resources/rose_card_screen.jpg'}></img>}>
+                            Card content
                     </Card>
+                    </Link>
                 </Col>
-                <Col span={8}>
+                <Col xs={24} sm={12} md={8} lg={8}>
                     <Card
                         title="Sorting"
                         bordered={true}
