@@ -38,16 +38,18 @@ const Projects = props => {
                             hoverable
                             cover={<img style={styles.imgStyle} alt="rose card cover" src={process.env.PUBLIC_URL + '/resources/rose_card_screen.jpg'}></img>}>
                             <p>Deconstructing the mathematical properties of the Rhodonea curve also known as the Rose function</p>
-                    </Card>
+                        </Card>
                     </Link>
                 </Col>
                 <Col xs={24} sm={12} md={8} lg={8}>
-                    <Card
-                        title="Sorting"
-                        bordered={true}
-                        hoverable>
-                        Card content
+                    <Link to='/projects/fourier'>
+                        <Card
+                            title="Fourier Series"
+                            bordered={true}
+                            hoverable>
+                            <p>Visualising the fourier series.</p>
                     </Card>
+                    </Link>
                 </Col>
             </Row>
         </div>
