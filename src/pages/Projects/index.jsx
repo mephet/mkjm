@@ -11,7 +11,7 @@ const Projects = props => {
         },
         imgStyle: {
             maxWidth: '100%',
-            maxHeight: '24em',
+            maxHeight: '20em',
         }
     }
 
@@ -37,7 +37,7 @@ const Projects = props => {
                             bordered={true}
                             hoverable
                             cover={<img style={styles.imgStyle} alt="rose card cover" src={process.env.PUBLIC_URL + '/resources/rose_card_screen.jpg'}></img>}>
-                            Card content
+                            <p>Deconstructing the mathematical properties of the Rhodonea curve also known as the Rose function</p>
                     </Card>
                     </Link>
                 </Col>

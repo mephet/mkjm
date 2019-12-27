@@ -7,6 +7,7 @@ import About from '../pages/About';
 import Physics from '../pages/Physics';
 import Rose from '../pages/Rose';
 import Projects from '../pages/Projects';
+import Fourier from '../pages/Fourier';
 
 const { Content } = Layout;
 
@@ -20,6 +21,7 @@ const AppRouter = () => {
             <Route path='/projects/physics' exact component={Physics} />
             <Route path='/projects' exact component={Projects} />
             <Route path='/projects/rose' exact component={Rose} />
+            <Route path='/projects/fourier' exact component={Fourier} />
         </Content>
     )
 }

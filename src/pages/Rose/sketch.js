@@ -1,21 +1,27 @@
 export class RoseFunction {
-    constructor(n, d) {
+    constructor(n, d, windowWidth, windowHeight) {
         this.n = n;
         this.d = d;
         this.k = n/d;
+        this.windowHeight = windowHeight;
+        this.windowWidth = windowWidth;
+        this.canvasWidth = Math.min(this.windowHeight, this.windowWidth)
     }
 
-    setup = (p5, parentCanvasRef) => {
-        p5.createCanvas(window.innerWidth, 500 - 67);
+    setup = (p5, canvasParentRef) => {
+        // const canvasWidth = Math.min(this.windowHeight, this.windowWidth)
+        p5.createCanvas(this.canvasWidth, this.canvasWidth).parent(canvasParentRef);
     }
 
     draw = p5 => {
         p5.background(51);
-        p5.translate(p5.width / 2, p5.height / 2)
+
+        this.drawWords(p5);
+        p5.translate(this.canvasWidth / 2, this.canvasWidth / 2)
     
         p5.beginShape();
         for (let a = 0; a < p5.TWO_PI * 10; a += 0.02) {
-            const r = 200 * p5.cos(this.k * a);
+            const r =  this.canvasWidth * 0.3 * p5.cos(this.k * a);
             let x = r * p5.cos(a);
             let y = r * p5.sin(a);
     
@@ -25,6 +31,12 @@ export class RoseFunction {
             p5.vertex(x, y)
         }
         p5.endShape(p5.CLOSE);
+    }
+
+    drawWords = p5 => {
+        p5.fill(255);
+        p5.textSize(28);
+        p5.text('k=' + (this.n/this.d).toFixed(2), 10, 50)
     }
 
 }

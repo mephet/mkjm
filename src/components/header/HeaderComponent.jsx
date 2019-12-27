@@ -41,6 +41,7 @@ const HeaderComponent = props => {
                 <Menu.Item key="sorting"><Link to="/projects/sorting">Sorting</Link></Menu.Item>
                 <Menu.Item key="physics"><Link to="/projects/physics">Physics</Link></Menu.Item>
                 <Menu.Item key="rose"><Link to="/projects/rose">Rose Function</Link></Menu.Item>
+                <Menu.Item key="fourier"><Link to="/projects/fourier">Fourier Series</Link></Menu.Item>
             </SubMenu>
             <Menu.Item key="github">
                 <Link to="/">Github</Link>

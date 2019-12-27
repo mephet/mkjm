@@ -2,33 +2,55 @@ import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import RoseFunction from './sketch';
 import { Slider } from 'antd';
+import RoseDescription from './RoseDescription';
+import { isMobile } from 'react-device-detect';
 
 const Rose = () => {
     const INITIAL_N = 5;
     const INITIAL_D = 5;
     const MAX_N = 10;
-    const STEP_N = 1;
+    const STEP_N = 0.2;
     const MAX_D = 10;
-    const STEP_D = 1;
+    const STEP_D = 0.2;
 
-    const [roseSketch, setRoseSketch] = useState(new RoseFunction(INITIAL_N, INITIAL_D));
+    const widthMultiplier = isMobile ? 0.8 : 0.6;
+
+    const [roseSketch, setRoseSketch] = useState(new RoseFunction(INITIAL_N,
+                                                                  INITIAL_D,
+                                                                  window.innerWidth * widthMultiplier,
+                                                                  window.innerHeight * widthMultiplier));
     const [n, setN] = useState(INITIAL_N);
     const [d, setD] = useState(INITIAL_D);
+
+    function handleResize() {
+        // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight);
+        setRoseSketch(new RoseFunction(n, d, window.innerWidth * widthMultiplier, window.innerHeight * widthMultiplier))
+    }
+
+
 
     const styles = {
         containerStyle: {
             marginTop: '64px',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'stretch',
+            marginLeft: isMobile ? '10%' : '20%',
+            marginRight: isMobile ? '10%' : '20%'
+        },
+        canvasContainerStyle: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         sliderStyle: {
             flex: 1,
-            marginLeft: '10%',
-            marginRight: '10%'
         },
         canvasStyle: {
-            marginLeft: '10%',
-            marginRight: '10%'
+            flex: 1,
+            marginTop: '2em'
         }
     }
 
@@ -49,17 +71,14 @@ const Rose = () => {
     function updateRose(n, d) {
         setD(d);
         setN(n);
-        setRoseSketch(new RoseFunction(n, d));
+        setRoseSketch(new RoseFunction(n, d, window.innerWidth * widthMultiplier, window.innerHeight * widthMultiplier));
     }
 
     return (
         <div style={styles.containerStyle}>
-            
-            <div style={styles.canvasStyle}>
-                <Sketch  setup={roseSketch.setup} draw={roseSketch.draw} />
-            </div>
+            <RoseDescription />
             <div style={styles.sliderStyle}>
-                <h4>N value</h4>
+                <h2>N value</h2>
                 <Slider
                     value={n}
                     onChange={n => updateRose(n, d)}
@@ -68,8 +87,9 @@ const Rose = () => {
                     max={MAX_N}
                     step={STEP_N} />
             </div>
+            <br />
             <div style={styles.sliderStyle}>
-                <h4>D Value</h4>
+                <h2>D Value</h2>
                 <Slider
                     value={d}
                     onChange={d => updateRose(n, d)}
@@ -78,7 +98,10 @@ const Rose = () => {
                     max={MAX_D}
                     step={STEP_D} />
             </div>
-
+            <div style={styles.canvasContainerStyle}>
+                <Sketch windowResized={handleResize} style={styles.canvasStyle} setup={roseSketch.setup} draw={roseSketch.draw} />
+            </div>
+            <br /> <br />
         </div>
     )
 
