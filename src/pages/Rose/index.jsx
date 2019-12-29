@@ -14,6 +14,7 @@ const Rose = () => {
     const STEP_D = 0.2;
 
     const widthMultiplier = isMobile ? 0.8 : 0.6;
+    
 
     const [roseSketch, setRoseSketch] = useState(new RoseFunction(INITIAL_N,
                                                                   INITIAL_D,
@@ -23,11 +24,8 @@ const Rose = () => {
     const [d, setD] = useState(INITIAL_D);
 
     function handleResize() {
-        // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight);
         setRoseSketch(new RoseFunction(n, d, window.innerWidth * widthMultiplier, window.innerHeight * widthMultiplier))
     }
-
-
 
     const styles = {
         containerStyle: {

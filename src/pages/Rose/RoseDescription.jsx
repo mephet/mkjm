@@ -20,7 +20,7 @@ const RoseDescription = props => {
                 The Rose is a sinusoid curve resembling the shape of flower petals. The curve was named rhodonea after the Italian mathematician Luigi Guido Grandi
                 who was best known for his work <i>Flores geometrici</i> in 1728 where he studied the Rose Curve.
             </Text>
-            <br /><br /><br />
+            <br /><br />
             <h3>Ring Around the Rosie</h3>
             <ul>
                 <li>If the value of <i>k</i> is odd, the rose will have <i>k</i> number of petals. </li>

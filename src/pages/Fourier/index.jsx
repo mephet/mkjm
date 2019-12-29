@@ -1,16 +1,44 @@
 import React, { useState } from 'react';
 import Sketch from 'react-p5'
 import { isMobile } from 'react-device-detect';
+import FourierDesciption from './FourierDescription';
 
 import FourierSeries from './sketch';
+import {Slider} from 'antd';
 
 const Fourier = () => {
+    const INITIAL_SERIES_NUM = 4;
+    const MAX_SERIES_NUM = 20;
+    const STEP_SERIES_NUM = 1;
 
-    const [fourierSketch, setFourierSketch] = useState(new FourierSeries());
+    const widthMultiplier = isMobile ? 0.95 : 0.6;
+    const radiusMultiplier = isMobile ? 40 : 50;
+    const [seriesNum, setSeriesNum] = useState(INITIAL_SERIES_NUM);
+    const [fourierSketch, setFourierSketch] = useState(new FourierSeries(window.innerWidth * widthMultiplier,
+        window.innerHeight * widthMultiplier,
+        INITIAL_SERIES_NUM,
+        radiusMultiplier));
+
 
     function handleResize() {
-        // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight);
-        setFourierSketch()
+        setFourierSketch(new FourierSeries(window.innerWidth * widthMultiplier,
+            window.innerHeight * widthMultiplier,
+            seriesNum,
+            radiusMultiplier))
+    }
+
+    function updateFourier(newNum) {
+        setSeriesNum(newNum);
+        setFourierSketch(new FourierSeries(window.innerWidth * widthMultiplier,
+            window.innerHeight * widthMultiplier,
+            newNum,
+            radiusMultiplier))
+    }
+
+    const sliderMarks = {
+        0 : '0',
+        10: '10',
+        20: '20',
     }
 
     const styles = {
@@ -40,6 +68,18 @@ const Fourier = () => {
 
     return (
         <div style={styles.containerStyle}>
+            <FourierDesciption />
+            <div style={styles.sliderStyle}>
+                <h2>Number of periodic signal inputs</h2>
+                <Slider
+                    value={seriesNum}
+                    onChange={n => updateFourier(n)}
+                    marks={sliderMarks}
+                    min={0}
+                    max={MAX_SERIES_NUM}
+                    step={STEP_SERIES_NUM} />
+            </div>
+            <br />
             <div style={styles.canvasContainerStyle}>
                 <Sketch windowResized={handleResize} setup={fourierSketch.setup} draw={fourierSketch.draw} />
             </div>

@@ -10,15 +10,17 @@ const styles = {
     },
     headerButtonStyle: {
         display: 'flex',
-        backgroundColo: 'darkblue',
+        flexDirection: 'row',
+        backgroundColor: '#0D206A',
     },
     logoStyle: {
         flex: 1,
-        fontSize: '20px',
+        paddingTop: '0.14em',
+        fontSize: '1.7em',
     },
     textStyle: {
         flex: 1,
-        fontSize: '20px',
+        fontSize: '1.7em',
         color: 'white',
     }
 

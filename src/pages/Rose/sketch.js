@@ -9,7 +9,6 @@ export class RoseFunction {
     }
 
     setup = (p5, canvasParentRef) => {
-        // const canvasWidth = Math.min(this.windowHeight, this.windowWidth)
         p5.createCanvas(this.canvasWidth, this.canvasWidth).parent(canvasParentRef);
     }
 
