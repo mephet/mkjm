@@ -9,11 +9,11 @@ export class FourierSeries {
         this.canvasWidth = Math.min(windowHeight, windowWidth);
     }
 
-    setup = (p5, canvasParentRef) => {
+    setup(p5, canvasParentRef) {
         p5.createCanvas(this.canvasWidth, this.canvasWidth).parent(canvasParentRef);
     }
 
-    draw = p5 => {
+    draw(p5) {
         p5.background(0);
         p5.translate(this.canvasWidth * this.translateMultiplier, this.canvasWidth / 2);
         this.time += 0.04;
@@ -44,7 +44,7 @@ export class FourierSeries {
 
     }
 
-    drawWave = (p5, x, y) => {
+    drawWave(p5, x, y) {
         p5.translate(500 * this.translateMultiplier, 0);
         p5.line(x - this.translateMultiplier * 500, y, 0, this.wave[0]);
         p5.beginShape();
@@ -56,14 +56,6 @@ export class FourierSeries {
             this.wave.pop();
         }
         p5.endShape();
-    }
-
-    drawEllipse = (p5, radius, time) => {
-
-
-
-
-
     }
 
 }
