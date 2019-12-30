@@ -2,9 +2,10 @@
   "name": "mkjmworld",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "http://mephet.github.io/mkjm",
+  "homepage": "http://mephet.github.io/mkjm",
   "dependencies": {
     "antd": "^3.26.4",
+    "gh-pages": "^2.1.1",
     "matter-js": "^0.14.2",
     "p5": "^0.10.2",
     "react": "^16.9.0",
