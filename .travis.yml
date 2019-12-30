@@ -1,10 +1,10 @@
 language: node_js
 node_js:
   - 12.9.1
-cache: npm
+cache: yarn
 
 install: 
-  - npm ci
+  - yarn install
 
 script:
   - yarn test
