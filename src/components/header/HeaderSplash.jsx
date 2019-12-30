@@ -26,10 +26,10 @@ const styles = {
 
 }
 
-const HeaderSplash = props => {
+const HeaderSplash = () => {
     return (
         <div style={styles.headerSplash}>
-            <Link to="/">
+            <Link to={process.env.PUBLIC_URL + "/"}>
                 <Button
                     style={styles.headerButtonStyle}
                     type="ghost"

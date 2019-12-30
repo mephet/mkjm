@@ -20,7 +20,7 @@ const Projects = () => {
         <div style={styles.containerStyle}>
             <Row gutter={[16, 16]}>
                 <Col xs={24} sm={12} md={8} lg={8}>
-                    <Link to='/projects/sorting'>
+                    <Link to={process.env.PUBLIC_URL + '/projects/sorting'}>
                         <Card
                             title="Sorting"
                             bordered={true}
@@ -31,7 +31,7 @@ const Projects = () => {
                     </Link>
                 </Col>
                 <Col xs={24} sm={12} md={8} lg={8}>
-                    <Link to='/projects/rose'>
+                    <Link to={process.env.PUBLIC_URL + '/projects/rose'}>
                         <Card
                             title="Rose Function"
                             bordered={true}
@@ -42,7 +42,7 @@ const Projects = () => {
                     </Link>
                 </Col>
                 <Col xs={24} sm={12} md={8} lg={8}>
-                    <Link to='/projects/fourier'>
+                    <Link to={process.env.PUBLIC_URL + '/projects/fourier'}>
                         <Card
                             title="Fourier Series"
                             bordered={true}

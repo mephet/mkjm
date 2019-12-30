@@ -6,6 +6,8 @@ export class RoseFunction {
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
         this.canvasWidth = Math.min(this.windowHeight, this.windowWidth)
+        this.draw = this.draw.bind(this);
+        this.setup = this.setup.bind(this);
     }
 
     setup(p5, canvasParentRef) {

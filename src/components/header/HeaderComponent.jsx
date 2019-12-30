@@ -14,7 +14,7 @@ const HeaderComponent = props => {
     const mode = isMobile ? 'vertical' : 'horizontal';
 
     const routeToProjectsPage = () => {
-        props.history.push('/projects')
+        props.history.push(process.env.PUBLIC_URL + '/projects')
 
     }
 
@@ -30,7 +30,7 @@ const HeaderComponent = props => {
         >
 
             <Menu.Item key="about">
-                <Link to="/about">About</Link>
+                <Link to={process.env.PUBLIC_URL + "/about"}>About</Link>
             </Menu.Item>
 
             <SubMenu
@@ -38,13 +38,13 @@ const HeaderComponent = props => {
                 onTitleClick={routeToProjectsPage}
                 title={<span><Icon type="project" />Projects</span>}
             >
-                <Menu.Item key="sorting"><Link to="/projects/sorting">Sorting</Link></Menu.Item>
-                <Menu.Item key="physics"><Link to="/projects/physics">Physics</Link></Menu.Item>
-                <Menu.Item key="rose"><Link to="/projects/rose">Rose Function</Link></Menu.Item>
-                <Menu.Item key="fourier"><Link to="/projects/fourier">Fourier Series</Link></Menu.Item>
+                <Menu.Item key="sorting"><Link to={process.env.PUBLIC_URL + "/projects/sorting"}>Sorting</Link></Menu.Item>
+                <Menu.Item key="physics"><Link to={process.env.PUBLIC_URL + "/projects/physics"}>Physics</Link></Menu.Item>
+                <Menu.Item key="rose"><Link to={process.env.PUBLIC_URL + "/projects/rose"}>Rose Function</Link></Menu.Item>
+                <Menu.Item key="fourier"><Link to={process.env.PUBLIC_URL + "/projects/fourier"}>Fourier Series</Link></Menu.Item>
             </SubMenu>
             <Menu.Item key="github">
-                <Link to="/">Github</Link>
+                <Link to={process.env.PUBLIC_URL + "/"}>Github</Link>
             </Menu.Item>
         </Menu>
     )
@@ -59,13 +59,13 @@ const HeaderComponent = props => {
         >
             <Menu>
                 <Menu.Item key="about">
-                    <Link to="/about">About</Link>
+                    <Link to={process.env.PUBLIC_URL + "/about"}>About</Link>
                 </Menu.Item>
                 <Menu.Item key="projects">
-                    <Link to="/projects">Projects</Link>
+                    <Link to={process.env.PUBLIC_URL + "/projects"}>Projects</Link>
                 </Menu.Item>
                 <Menu.Item key="github">
-                    <Link to="/">Github</Link>
+                    <Link to={process.env.PUBLIC_URL + "/"}>Github</Link>
                 </Menu.Item>
             </Menu>
         </Drawer>

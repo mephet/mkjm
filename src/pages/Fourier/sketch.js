@@ -7,6 +7,9 @@ export class FourierSeries {
         this.radiusMultiplier = radiusMultiplier;
         this.wave = [];
         this.canvasWidth = Math.min(windowHeight, windowWidth);
+
+        this.draw = this.draw.bind(this);
+        this.setup = this.setup.bind(this);
     }
 
     setup(p5, canvasParentRef) {
