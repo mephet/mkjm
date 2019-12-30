@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography } from 'antd';
-import { MobileView, BrowserView, isMobile } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
-const { Title, Text } = Typography;
+// const { Title, Text } = Typography;
 
 const About = () => {
 
