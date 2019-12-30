@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Card } from 'antd';
 import { Link } from "react-router-dom";
 
-const Projects = props => {
+const Projects = () => {
 
     const styles = {
         containerStyle: {
