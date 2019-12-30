@@ -2,6 +2,7 @@
   "name": "mkjmworld",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://mephet.github.io/mkjm",
   "dependencies": {
     "antd": "^3.26.4",
     "matter-js": "^0.14.2",
