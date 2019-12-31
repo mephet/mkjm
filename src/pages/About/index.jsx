@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography } from 'antd';
 import { isMobile } from 'react-device-detect';
 
 // const { Title, Text } = Typography;
