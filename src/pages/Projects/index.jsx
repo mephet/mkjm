@@ -19,7 +19,7 @@ const Projects = () => {
     return (
         <div style={styles.containerStyle}>
             <Row gutter={[16, 16]}>
-                <Col xs={24} sm={12} md={8} lg={8}>
+                <Col xs={24} sm={12} md={8} lg={6}>
                     <Link to={process.env.PUBLIC_URL + '/projects/sorting'}>
                         <Card
                             title="Sorting"
@@ -30,7 +30,7 @@ const Projects = () => {
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={24} sm={12} md={8} lg={8}>
+                <Col xs={24} sm={12} md={8} lg={6}>
                     <Link to={process.env.PUBLIC_URL + '/projects/rose'}>
                         <Card
                             title="Rose Function"
@@ -41,13 +41,23 @@ const Projects = () => {
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={24} sm={12} md={8} lg={8}>
+                <Col xs={24} sm={12} md={8} lg={6}>
                     <Link to={process.env.PUBLIC_URL + '/projects/fourier'}>
                         <Card
                             title="Fourier Series"
                             bordered={true}
                             hoverable>
                             <p>Visualising the fourier series.</p>
+                    </Card>
+                    </Link>
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6}>
+                    <Link to={process.env.PUBLIC_URL + '/projects/physics'}>
+                        <Card
+                            title="Physics"
+                            bordered={true}
+                            hoverable>
+                            <p>Physics.</p>
                     </Card>
                     </Link>
                 </Col>
