@@ -8,6 +8,7 @@ import Physics from '../pages/Physics';
 import Rose from '../pages/Rose';
 import Projects from '../pages/Projects';
 import Fourier from '../pages/Fourier';
+import PortfolioOptimization from '../pages/PortfolioOptimization';
 
 const { Content } = Layout;
 
@@ -22,6 +23,7 @@ const AppRouter = () => {
             <Route path={process.env.PUBLIC_URL + '/projects'} exact component={Projects} />
             <Route path={process.env.PUBLIC_URL + '/projects/rose'} exact component={Rose} />
             <Route path={process.env.PUBLIC_URL + '/projects/fourier'} exact component={Fourier} />
+            <Route path={process.env.PUBLIC_URL + '/projects/poptimization'} exact component={PortfolioOptimization} />
         </Content>
     )
 }

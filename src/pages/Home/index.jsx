@@ -14,14 +14,13 @@ import HomeComponent2 from './components/HomeComponent2';
 const cloud = "https://awv3node-homepage.surge.sh/build/assets/cloud.svg";
 
 const Home = () => {
-    console.log(process.env.PUBLIC_URL + '/resources/bg1.jpeg');
     const styles = {
         p1Style: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundImage: `url(${process.env.PUBLIC_URL} + '/resources/bg1.jpeg')`,
+            backgroundImage: `url(${process.env.PUBLIC_URL}/resources/bg1.jpeg)`,
             backgroundSize: 'cover'
         },
         p2Style: {
