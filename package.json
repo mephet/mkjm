@@ -2,11 +2,11 @@
   "name": "mkjmworld",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mephet.github.io/mkjm",
   "dependencies": {
     "@nivo/bar": "^0.61.1",
     "@nivo/pie": "^0.61.1",
     "antd": "^3.26.4",
+    "axios": "^0.19.2",
     "gh-pages": "^2.1.1",
     "matter-js": "^0.14.2",
     "p5": "^0.10.2",

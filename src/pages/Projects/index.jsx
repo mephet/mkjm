@@ -11,7 +11,7 @@ const Projects = () => {
         },
         imgStyle: {
             maxWidth: '100%',
-            maxHeight: '20em',
+            height: '20em',
         }
     }
 

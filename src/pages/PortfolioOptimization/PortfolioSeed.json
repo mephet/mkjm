@@ -3,10 +3,12 @@
         "holdings": [
             {
                 "fund_name": "Fund A",
+                "is_frozen": "N",
                 "percent": 0.5
             },
             {
                 "fund_name": "Fund C",
+                "is_frozen": "N",
                 "percent": 0.5
             }
         ]
@@ -48,7 +50,7 @@
                     "percent": 0.3
                 },
                 {
-                    "asset_name": "CN_HK",
+                    "asset_name": "CN_HK_EQ",
                     "percent": 0.7
                 }
             ]
