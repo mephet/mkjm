@@ -20,7 +20,7 @@ export const getL2Allocation = (l2List, clientHoldings, fundList) => {
 
     clientHoldings.forEach(h => {
         fundList.forEach(f => {
-            if (h.fund_name === f.name) {
+            if (h.fund_name === f["Fund Name"]) {
                 f.allocation.forEach(a => {
                     let currVal = fundMap.get(a.asset_name);
                     fundMap.set(a.asset_name, currVal + a.percent * h.percent)
@@ -46,8 +46,9 @@ export class OptimizationFormatter {
 
     static toFundDfFormat(fundAllocation, l2AssetClassList) {
         let fundOutput = [];
-        fundAllocation.forEach(fund => {
+        fundAllocation.forEach((fund, idx) => {
             let tmpObj = {};
+            tmpObj['key'] = idx;
             tmpObj["Fund Name"] = fund.name;
             l2AssetClassList.forEach(ac => {
                 tmpObj[ac] = 0;
@@ -72,7 +73,6 @@ export class OptimizationFormatter {
                 }
             });
         });
-        console.log(modelOutput);
         return modelOutput;
     }
 }

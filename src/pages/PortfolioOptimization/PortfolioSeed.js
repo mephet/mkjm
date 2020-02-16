@@ -1,4 +1,8 @@
-{
+export const l2AssetClassList = ['AXJ_EQ', 'CASH', 'CN_HK_EQ', 'EUXUK_EQ', 'GLB_EQ', 'INC_ALTV',
+    'INC_DMHY_BOND', 'INC_DMIG_BOND', 'INC_EM_BOND', 'INC_GLOBAL_DIV', 'INC_MULTI_ASSET',
+    'JP_EQ', 'NA_EQ', 'OTHER_EM_EQ', 'OTHERS', 'THEMATIC_COMM', 'THEMATIC_EQ', 'THEMATIC_OTHERS', 'UK_EQ'];
+
+export const initialSeedData = {
     "client_portfolio": {
         "holdings": [
             {
@@ -86,7 +90,7 @@
                 },
                 {
                     "asset_name": "INC_DMIG_BOND",
-                    "percent": 0.6    
+                    "percent": 0.6
                 }
             ]
         }
