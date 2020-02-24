@@ -1,10 +1,10 @@
 import React from "react";
-import { Table, Input, InputNumber, Popconfirm, Form } from "antd";
+import { Table, Input, InputNumber, Popconfirm, Form, Button } from "antd";
+import { updateFundList } from "../../../actions/optimizationAction";
 import { connect } from "react-redux";
 
 const FundDataConfiguration = props => {
-  const { l2AssetClassList, fundList } = props.optimizationState;
-  console.log(fundList);
+  const { l2AssetClassList, fundList, updateFundList } = props;
 
   const data = fundList;
   const EditableContext = React.createContext();
@@ -12,7 +12,7 @@ const FundDataConfiguration = props => {
   class EditableCell extends React.Component {
     getInput = () => {
       if (this.props.inputType === "number") {
-        return <InputNumber />;
+        return <InputNumber min={0} max={1} step={0.1} />;
       }
       return <Input />;
     };
@@ -64,9 +64,9 @@ const FundDataConfiguration = props => {
         return {
           title: k,
           dataIndex: k,
-          width: "5vw",
-          editable: k === "key" || k === "Fund Name" ? false : true,
-          fixed: k == "key" || k === "Fund Name" ? "left" : null
+          width: k === "key" ? "4.5vw" : "7vw",
+          editable: k === "key" ? false : true,
+          fixed: k === "key" || k === "Fund Name" ? "left" : null
         };
       });
       this.columns.push(
@@ -74,22 +74,26 @@ const FundDataConfiguration = props => {
           title: "Grand Total",
           dataIndex: "Grand Total",
           width: "4vw",
-          fixed: 'right',
+          fixed: "right",
           render: (text, record) => {
             let rkeys = Object.keys(record);
             let total = 0;
             rkeys.forEach(key => {
               if (l2AssetClassList.includes(key)) {
-                total += Number(record[key])
+                total += Number(record[key]);
               }
-            })
-            return <h1>{total}</h1>;
+            });
+            return (
+              <h3 style={{ color: total === 1 ? "black" : "red" }}>
+                {total * 100 + "%"}
+              </h3>
+            );
           }
         },
         {
           title: "operation",
           dataIndex: "operation",
-          width: "4vw",
+          width: "5vw",
           fixed: "right",
           render: (text, record) => {
             const { editingKey } = this.state;
@@ -98,28 +102,31 @@ const FundDataConfiguration = props => {
               <span>
                 <EditableContext.Consumer>
                   {form => (
-                    <a
-                      onClick={() => this.save(form, record.key)}
-                      style={{ marginRight: 8 }}
-                    >
+                    <Button onClick={() => this.save(form, record.key)}>
                       Save
-                    </a>
+                    </Button>
                   )}
                 </EditableContext.Consumer>
+                <Popconfirm
+                  title="Are you sure you want to delete this record?"
+                  onConfirm={() => this.delete(record.key)}
+                >
+                  <Button>Delete</Button>
+                </Popconfirm>
                 <Popconfirm
                   title="Sure to cancel?"
                   onConfirm={() => this.cancel(record.key)}
                 >
-                  <a>Cancel</a>
+                  <Button>Cancel</Button>
                 </Popconfirm>
               </span>
             ) : (
-              <a
+              <Button
                 disabled={editingKey !== ""}
                 onClick={() => this.edit(record.key)}
               >
                 Edit
-              </a>
+              </Button>
             );
           }
         }
@@ -127,6 +134,15 @@ const FundDataConfiguration = props => {
     }
 
     isEditing = record => record.key === this.state.editingKey;
+
+    delete = key => {
+      const dataSource = [...this.state.data];
+      const newData = dataSource.filter(item => item.key !== key);
+      updateFundList(newData);
+      this.setState({
+        editingKey: ""
+      });
+    };
 
     cancel = () => {
       this.setState({ editingKey: "" });
@@ -145,11 +161,12 @@ const FundDataConfiguration = props => {
             ...item,
             ...row
           });
-          console.log(newData);
-          this.setState({ data: newData, editingKey: "" });
+          updateFundList(newData);
+          this.setState({ editingKey: "" });
         } else {
           newData.push(row);
-          this.setState({ data: newData, editingKey: "" });
+          updateFundList(newData);
+          this.setState({ editingKey: "" });
         }
       });
     }
@@ -173,7 +190,7 @@ const FundDataConfiguration = props => {
           ...col,
           onCell: record => ({
             record,
-            inputType: col.dataIndex === "age" ? "number" : "text",
+            inputType: col.dataIndex === "Fund Name" ? "text" : "number",
             dataIndex: col.dataIndex,
             title: col.title,
             editing: this.isEditing(record)
@@ -205,8 +222,18 @@ const FundDataConfiguration = props => {
 
 const mapStateToProps = state => {
   return {
-    optimizationState: state.optimizationDetails
+    fundList: state.optimizationDetails.fundList,
+    l2AssetClassList: state.optimizationDetails.l2AssetClassList
   };
 };
 
-export default connect(mapStateToProps)(FundDataConfiguration);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateFundList: newFundList => dispatch(updateFundList(newFundList))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FundDataConfiguration);

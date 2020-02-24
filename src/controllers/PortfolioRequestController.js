@@ -1,16 +1,18 @@
 import axios from 'axios';
 
 export async function sendClientAllocation(data) {
-    const url = 'http://localhost:5000/api/optimization';
+    const url = `${process.env.REACT_APP_API_ENDPOINT}/projects/api/optimization`;
     const response = await axios.post(
         url,
         data
     )
 
-    console.log(response);
-};
+    return await response.data;
+}
 
 export async function test() {
-    const response = await axios.get('http://localhost:5000/test')
+    const url = `${process.env.REACT_APP_API_ENDPOINT}/projects/api/test`;
+    const response = await axios.get(process.env.REACT_APP_API_ENDPOINT + '/projects/api/test')
     console.log(response)
+    return response;
 }

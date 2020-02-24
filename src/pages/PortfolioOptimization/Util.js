@@ -1,41 +1,47 @@
-export const constructBarDataFromMap = (aMap) => {
-    let arr = [];
-    aMap.forEach((v, k) => {
-        arr.push({
-            id: k,
-            label: k,
-            value: v
-        })
+import { l2AssetClassList } from './PortfolioSeed.js';
+
+
+export function getL2Gaps(clientJson, modelJson, fundJson) {
+
+    let modelAlloc = [];
+    l2AssetClassList.forEach(asset => {
+        modelAlloc[asset] = modelJson[0][asset];
     })
-    return arr;
-}
 
+    let clientAlloc = [];
+    l2AssetClassList.forEach(asset => {
+        clientAlloc[asset] = 0;
+    })
 
-export const getL2Allocation = (l2List, clientHoldings, fundList) => {
-
-    let fundMap = new Map();
-    l2List.forEach(asset => {
-        fundMap.set(asset, 0)
-    });
-
-    clientHoldings.forEach(h => {
-        fundList.forEach(f => {
-            if (h.fund_name === f["Fund Name"]) {
-                f.allocation.forEach(a => {
-                    let currVal = fundMap.get(a.asset_name);
-                    fundMap.set(a.asset_name, currVal + a.percent * h.percent)
+    clientJson.forEach(c => {
+        fundJson.forEach(f => {
+            if (c["Fund Name"] === f["Fund Name"]) {
+                l2AssetClassList.forEach(a => {
+                    let currVal = clientAlloc[a];
+                    clientAlloc[a] = currVal + c["Fund Allocation"] * f[a];
                 })
             }
         })
     })
+    const gap = calculateGapDiff(clientAlloc, modelAlloc, l2AssetClassList);
+    return gap;
+}
 
-    return fundMap;
+function calculateGapDiff(clientAlloc, modelAlloc, l2AssetClassList) {
+    let outputAlloc = [];
+    l2AssetClassList.forEach(asset => {
+        outputAlloc[asset] = Math.abs(clientAlloc[asset] - modelAlloc[asset]);
+    })
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let gap = Object.values(outputAlloc).reduce(reducer);
+    return gap;
 }
 
 export class OptimizationFormatter {
     static toClientDfFormat(clientHoldings) {
-        return clientHoldings.map(holding => {
+        return clientHoldings.map((holding, idx) => {
             return {
+                "key": idx,
                 "Fund Code": holding.fund_name,
                 "Fund Name": holding.fund_name,
                 "Frozen Status": holding.is_frozen,
@@ -64,7 +70,7 @@ export class OptimizationFormatter {
     }
 
     static toModelDfFormat(modelAllocation, l2AssetClassList) {
-        let modelOutput = {};
+        let modelOutput = { key: 0 };
         l2AssetClassList.forEach(ac => {
             modelOutput[ac] = 0;
             modelAllocation.forEach(asset => {
@@ -73,6 +79,6 @@ export class OptimizationFormatter {
                 }
             });
         });
-        return modelOutput;
+        return [modelOutput];
     }
 }

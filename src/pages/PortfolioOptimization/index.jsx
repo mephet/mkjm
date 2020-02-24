@@ -1,79 +1,98 @@
-import React, { useState } from 'react';
-import { isMobile } from 'react-device-detect';
-import AllocationChart from './AllocationChart.jsx';
-import { getL2Allocation, constructBarDataFromMap, OptimizationFormatter } from './Util.js';
-import AllocationBarChart from './AllocationBarChart.jsx';
-import { Button } from 'antd';
-import { sendClientAllocation } from '../../controllers/PortfolioRequestController.js';
-import FundDataConfiguration from './FundDataConfiguraion.jsx';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { isMobile } from "react-device-detect";
+// import AllocationChart from './AllocationChart.jsx';
+import AllocationBarChart from "./AllocationBarChart.jsx";
+import { sendClientAllocation, test } from "../../controllers/PortfolioRequestController.js";
+
+import { connect } from "react-redux";
+import FundDataConfiguration from "./EditableTables/FundDataConfiguration.jsx";
+import ClientHoldingsConfiguration from "./EditableTables/ClientHoldingsConfiguration.jsx";
+import ModelPortfolioConfiguration from "./EditableTables/ModelPortfolioConfiguration.jsx";
+import { Button, Collapse, Icon, Spin } from "antd";
+import PortfolioStatistic from "./PortfolioStatistic.jsx";
+import { getL2Gaps } from "./Util.js";
+
+const { Panel } = Collapse;
 
 const PortfolioOptimization = props => {
+  const { fundList, clientPortfolio, modelPortfolio } = props;
 
-    const { fundList, l2AssetClassList, clientPortfolio, modelPortfolio } = props;
+  const [allocation, setAllocation] = useState(null);
+  const [loadingOp, setLoadingOp] = useState(false);
 
-    console.log(l2AssetClassList);
+  const handleResponse = () => {
+    setLoadingOp(true);
+    sendClientAllocation(toOptimizer).then(response => {
+      setAllocation(response);
+      setLoadingOp(false);
+    });
+  };
 
-    let output = clientPortfolio.holdings.map(h => {
-        return { id: h.fund_name, label: h.fund_name, value: h.percent * 100 }
-    })
+  const gaps = getL2Gaps(clientPortfolio, modelPortfolio, fundList)
 
-    // let clientAllocMap = getL2Allocation(l2AssetClassList, clientPortfolio.holdings, fundList);
-    // let clientBarData = constructBarDataFromMap(clientAllocMap);
-    const clientJson = OptimizationFormatter.toClientDfFormat(clientPortfolio.holdings);
-    const fundJson = fundList;
-    const modelJson = OptimizationFormatter.toModelDfFormat(modelPortfolio.model_allocation, l2AssetClassList);
+  const toOptimizer = {
+    clientJson: clientPortfolio,
+    fundJson: fundList,
+    modelJson: modelPortfolio
+  };
 
-    const toOptimizer = {
-        clientJson,
-        fundJson,
-        modelJson
+  const styles = {
+    containerStyle: {
+      marginTop: "64px",
+      fontFamily: `'roboto', 'sans-serif'`,
+      paddingTop: "5em",
+      marginLeft: isMobile ? null : "20em",
+      marginRight: isMobile ? null : "20em"
+    },
+    graphContainerStyle: {
+      display: "flex",
+      flexDirection: "column",
+      height: "50em"
+    },
+    barChartStyle: {
+      height: "50em"
+    },
+    pieChartStyle: {
+      height: "20em"
     }
+  };
 
-    const styles = {
-        containerStyle: {
-            marginTop: '64px',
-            fontFamily: `'roboto', 'sans-serif'`,
-            paddingTop: '5em',
-            marginLeft: isMobile ? null : '20em',
-            marginRight: isMobile ? null : '20em'
-        },
-        graphContainerStyle: {
-            display: 'flex',
-            flexDirection: 'column',
-            height: '50em'
-        },
-        barChartStyle: {
-            height: '50em'
-        },
-        pieChartStyle: {
-            height: '20em'
-        }
-    }
+  const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-    return (
-        <div style={styles.containerStyle}>
-            <h1>Client Allocation</h1>
-            <Button type="primary" onClick={() => sendClientAllocation(toOptimizer)}>Client Allocation</Button>
-            <h1>Fund Data</h1>
-            <FundDataConfiguration />
-            <div style={styles.graphContainerStyle}>
-                {/* <FundDataConfig2 /> */}
-            </div>
-            <h1>End</h1>
-        </div>
-    )
-
-
-}
+  return (
+    <div style={styles.containerStyle}>
+      <PortfolioStatistic gaps={gaps} clientPortfolio={clientPortfolio} />
+      <Collapse defaultActiveKey={['1']}>
+        <Panel header="Client Portfolio" key="1">
+          <ClientHoldingsConfiguration />
+        </Panel>
+        <Panel header="Model Portfolio" key="2">
+          <ModelPortfolioConfiguration />
+        </Panel>
+        <Panel header="Fund Data" key="3">
+          <FundDataConfiguration />
+        </Panel>
+      </Collapse>
+      <h1>Allocation</h1>
+      <Button type="primary" onClick={handleResponse}>
+        Optimize Portfolio
+      </Button>
+      <div style={styles.graphContainerStyle}>
+        {loadingOp ? <Spin indicator={antIcon} /> : (allocation === null ? null : <AllocationBarChart data={allocation} />)}
+      </div>
+      <Button onClick={() => console.log(fundList)}>log</Button>
+      <Button onClick={test}>Test</Button>
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
-    return {
-        l2AssetClassList: state.optimizationDetails.l2AssetClassList,
-        fundList: state.optimizationDetails.fundList,
-        clientPortfolio: state.optimizationDetails.clientPortfolio,
-        modelPortfolio: state.optimizationDetails.modelPortfolio
-    }
-}
+  return {
+    l2AssetClassList: state.optimizationDetails.l2AssetClassList,
+    fundList: state.optimizationDetails.fundList,
+    clientPortfolio: state.optimizationDetails.clientPortfolio,
+    modelPortfolio: state.optimizationDetails.modelPortfolio
+  };
+};
 
 export default connect(mapStateToProps)(PortfolioOptimization);

@@ -11,6 +11,7 @@
     "matter-js": "^0.14.2",
     "p5": "^0.10.2",
     "react": "^16.9.0",
+    "react-cookie": "^4.0.3",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.9.0",
     "react-p5": "^1.1.8",
@@ -20,7 +21,8 @@
     "react-spring": "^8.0.27",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "serve": "^11.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,11 +30,12 @@
     "test": "eslint src",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -b gh-pages -d build"
+    "deploy": "serve -s build -l 3000 "
   },
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://api:5000",
   "browserslist": {
     "production": [
       ">0.2%",

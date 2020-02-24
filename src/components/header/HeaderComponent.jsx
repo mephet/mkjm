@@ -24,7 +24,7 @@ const HeaderComponent = props => {
 
     const menu = (
         <Menu
-            theme='dark'
+            theme='light'
             mode={mode}
             style={styles.headerItemsStyle}
         >
