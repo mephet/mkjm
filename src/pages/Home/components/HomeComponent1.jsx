@@ -15,12 +15,12 @@ const HomeComponent1 = props => {
 
 const styles = {
     containerStyle: {
-        maxWidth: '100%',
+        maxWidth: '100vw',
     },
     textContainer: {
-        width: isMobile ? '100%' : '40vw',
-        paddingLeft: isMobile ? '5%' : '0%',
-        paddingRight: isMobile ? '5%' : '0%',
+        width: isMobile ? '100vw' : '65vw',
+        paddingLeft: isMobile ? '5vw' : '15vw',
+        paddingRight: isMobile ? '5vw' : '15vw',
     },
     textStyle: {
         flex: 2,

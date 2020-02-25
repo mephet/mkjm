@@ -8,12 +8,17 @@ import { Row, Col } from 'antd';
 const Home = () => {
     const styles = {
         containerStyle: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
             marginTop: '64px',
             fontFamily: `'roboto', 'sans-serif'`,
             width: '100%',
         },
-        mainPageContainer : {
-            paddingTop: '5em',
+        mainPageContainer: {
+            paddingTop: '5vh',
+            paddingBottom: '5vh',
+            width: '100%',
             backgroundColor: '#001529'
         },
         p2Style: {
@@ -28,11 +33,12 @@ const Home = () => {
 
     return (
         <div style={styles.containerStyle}>
-            <Row gutter={48} justify="space-around" style={styles.mainPageContainer} type="flex" align="middle">
-                <Col md={{ span: 18 }} sm={{ span: 24 }} className={styles['align-center']}>
+            <Row gutter={48}  >
+                <Col md={{ span: 18 }} sm={{ span: 24 }} style={styles.mainPageContainer} >
                     <HomeComponent1 />
                 </Col>
             </Row>
+            <HomeComponent2 />
         </div>
     )
 
