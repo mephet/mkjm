@@ -24,7 +24,7 @@ const HeaderComponent = props => {
 
     const menu = (
         <Menu
-            theme='light'
+            theme='dark'
             mode={mode}
             style={styles.headerItemsStyle}
         >
@@ -51,21 +51,22 @@ const HeaderComponent = props => {
 
     const mobileMenu = (
         <Drawer
+            drawerStyle={{ top: 64 }}
             title='Navigation'
-            placement='left'
+            placement='top'
             closable={true}
             onClose={toggleMobileMenuOpen}
             visible={isMobileMenuOpen}
         >
             <Menu>
                 <Menu.Item key="about">
-                    <Link to={process.env.PUBLIC_URL + "/about"}>About</Link>
+                    <Link onClick={toggleMobileMenuOpen}  to={process.env.PUBLIC_URL + "/about"}>About</Link>
                 </Menu.Item>
                 <Menu.Item key="projects">
-                    <Link to={process.env.PUBLIC_URL + "/projects"}>Projects</Link>
+                    <Link onClick={toggleMobileMenuOpen}  to={process.env.PUBLIC_URL + "/projects"}>Projects</Link>
                 </Menu.Item>
                 <Menu.Item key="github">
-                    <Link to={process.env.PUBLIC_URL + "/"}>Github</Link>
+                    <Link onClick={toggleMobileMenuOpen} to={process.env.PUBLIC_URL + "/"}>Github</Link>
                 </Menu.Item>
             </Menu>
         </Drawer>
