@@ -20,8 +20,7 @@ const About = () => {
 
     return (
         <div style={styles.containerStyle}>
-            <h1>This is the about page</h1>
-            <p></p>
+            <p>This is the about page</p>
         </div>
     )
 

@@ -39,9 +39,9 @@ const HeaderComponent = props => {
                 title={<span><Icon type="project" />Projects</span>}
             >
                 <Menu.Item key="sorting"><Link to={process.env.PUBLIC_URL + "/projects/sorting"}>Sorting</Link></Menu.Item>
-                <Menu.Item key="physics"><Link to={process.env.PUBLIC_URL + "/projects/physics"}>Physics</Link></Menu.Item>
                 <Menu.Item key="rose"><Link to={process.env.PUBLIC_URL + "/projects/rose"}>Rose Function</Link></Menu.Item>
                 <Menu.Item key="fourier"><Link to={process.env.PUBLIC_URL + "/projects/fourier"}>Fourier Series</Link></Menu.Item>
+                <Menu.Item key="physics"><Link to={process.env.PUBLIC_URL + "/projects/poptimization"}>Portfolio Optimization</Link></Menu.Item>
             </SubMenu>
             <Menu.Item key="github">
                 <Link to={process.env.PUBLIC_URL + "/"}>Github</Link>

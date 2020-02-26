@@ -4,20 +4,19 @@ import { Spring } from 'react-spring/renderprops';
 
 const FadeInComponent = ({ delay, fromY, toY, children }) => {
     return (
-        <VisibilitySensor partialVisibility offset={{ bottom: fromY }}>
+        <VisibilitySensor partialVisibility offset={{ bottom: toY/2 }}>
             {({ isVisible }) =>
                 <Spring
                     delay={delay}
                     to={{
-                        opacity: isVisible ? 1 : 0.5,
-                        transform: isVisible ? `translateY(${toY})` : `translateY(${fromY})`
+                        opacity: isVisible ? 1 : 0,
+                        transform: isVisible ? `translateY(${toY}px)` : `translateY(${fromY}px)`
                     }}>
                     {springProps => {
                         return (
                             <div style={springProps}>{children}</div>
                         )
                     }}
-
                 </Spring>
             }
         </VisibilitySensor>

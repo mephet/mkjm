@@ -10,10 +10,7 @@ const HomeComponent2 = () => {
 
     const styles = {
         containerStyle: {
-            backgroundColor: 'pink',
-            minHeight: 400,
-            width: '100%',
-            clear: 'both'
+
         },
         spacer: {
             height: 2000,
@@ -29,14 +26,19 @@ const HomeComponent2 = () => {
             <div style={styles.spacer}>
                 TEST
             </div>
-            <FadeInComponent
-                style={{ height: 3000 }}
-                delay={1500}
-                fromY={-400}
-                toY={0}
-            >
-                <p>Testaksdifhaoisdfuhdos</p>
-            </FadeInComponent>
+            <div style={{
+                height: 2000,
+                backgroundColor: 'white',
+            }}>
+                <FadeInComponent
+                    delay={300}
+                    fromY={300}
+                    toY={0}
+                >
+                    <h2>We keep an active boolean flag in the component state. When the element first comes into view, and the once prop is true, we change the active state to false. By doing that, we turn off the sensor by passing to the active prop a value of false.</h2>
+                </FadeInComponent>
+            </div>
+
             <div style={styles.spacer}>
                 TEST
             </div>
