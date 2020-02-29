@@ -4,7 +4,7 @@ import { updateClientPortfolio } from "../../../actions/optimizationAction";
 import { connect } from "react-redux";
 
 const ClientHoldingsConfiguration = props => {
-  const { l2AssetClassList, clientPortfolio, updateClientPortfolio } = props;
+  const { clientPortfolio, updateClientPortfolio } = props;
 
   const rowKeys = Object.keys(clientPortfolio[0]);
   const data = clientPortfolio;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
 import HomeComponent1 from './components/HomeComponent1';
 import HomeComponent2 from './components/HomeComponent2';
 import { Row, Col } from 'antd';
+import HomeComponent3 from './components/HomeComponent3';
 
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
             justifyContent: 'space-around',
             marginTop: '64px',
             fontFamily: `'roboto', 'sans-serif'`,
-            width: '100%',
+            maxWidth: '100%',
         },
         mainPageContainer: {
             paddingTop: '5vh',
@@ -21,24 +21,29 @@ const Home = () => {
             width: '100%',
             backgroundColor: '#001529'
         },
-        p2Style: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        p1ForeStyle: {
-            opacity: 1
-        },
+        contentContainer: {
+            backgroundColor: 'white',
+            width: '100%'
+        }
     }
 
     return (
         <div style={styles.containerStyle}>
-            <Row gutter={48}  >
+            <Row>
                 <Col md={{ span: 18 }} sm={{ span: 24 }} style={styles.mainPageContainer} >
                     <HomeComponent1 />
                 </Col>
             </Row>
-            <HomeComponent2 />
+            <Row>
+                <Col md={{ span: 18 }} sm={{ span: 24 }} style={styles.contentContainer} >
+                    <HomeComponent2 />
+                </Col>
+            </Row>
+            <Row type="flex" align="middle">
+                <Col md={{ span: 18 }} sm={{ span: 24 }} style={styles.contentContainer} >
+                    <HomeComponent3 />
+                </Col>
+            </Row>
         </div>
     )
 }

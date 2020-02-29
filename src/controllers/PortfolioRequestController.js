@@ -12,7 +12,6 @@ export async function sendClientAllocation(data) {
 
 export async function test() {
     const url = `${process.env.REACT_APP_API_ENDPOINT}/projects/api/test`;
-    const response = await axios.get(process.env.REACT_APP_API_ENDPOINT + '/projects/api/test')
-    console.log(response)
+    const response = await axios.get(url)
     return response;
 }

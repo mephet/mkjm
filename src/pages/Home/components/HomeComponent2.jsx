@@ -1,46 +1,46 @@
 import React from 'react';
-import { Card } from 'antd';
-import VisibilitySensor from 'react-visibility-sensor';
-import { useSpring, animated } from 'react-spring'
-import { Spring } from 'react-spring/renderprops';
 import FadeInComponent from '../../../components/FadeInComponent';
+import { isMobile } from 'react-device-detect';
 
 
 const HomeComponent2 = () => {
 
     const styles = {
         containerStyle: {
-
+            paddingTop: '20vh',
+            backgroundColor: 'white',
+            width: '100%',
+            paddingLeft: isMobile ? '5vw' : '15vw',
+            paddingRight: isMobile ? '5vw' : '20vw',
         },
         spacer: {
             height: 2000,
             backgroundColor: 'pink'
         },
-        h2styles: {
-            fontSize: '82px'
+        h1Style: {
+            fontSize: '2rem'
+        },
+        h2style: {
+            fontSize: '1.4rem'
         }
     }
 
     return (
-        <div styles={styles.containerStyle}>
-            <div style={styles.spacer}>
-                TEST
-            </div>
-            <div style={{
-                height: 2000,
-                backgroundColor: 'white',
-            }}>
+        <div style={styles.containerStyle}>
+            <div >
                 <FadeInComponent
                     delay={300}
                     fromY={300}
                     toY={0}
                 >
-                    <h2>We keep an active boolean flag in the component state. When the element first comes into view, and the once prop is true, we change the active state to false. By doing that, we turn off the sensor by passing to the active prop a value of false.</h2>
+                    <div>
+                        <h1 style={styles.h1Style}>What is a PWA Application?</h1>
+                        <h3 style={styles.h2style}>
+                            A Progressive Web App uses modern web capabilities to deliver an experience to users that mirror that of a native mobile application.
+                            PWAs are served through the browser and are intended to work on any platform or device.
+                        </h3>
+                    </div>
                 </FadeInComponent>
-            </div>
-
-            <div style={styles.spacer}>
-                TEST
             </div>
         </div>
     )

@@ -15,7 +15,7 @@ const HomeComponent1 = props => {
 
 const styles = {
     containerStyle: {
-        maxWidth: '100vw',
+        width: '100%'
     },
     textContainer: {
         width: isMobile ? '100vw' : '65vw',
