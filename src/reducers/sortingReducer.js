@@ -6,7 +6,7 @@ const initialState = {
     stepQueue: [],
 }
 
-const sortingReducer = (state = initialState, action) => {
+function sortingReducer(state = initialState, action) {
     switch (action.type) {
         case 'UPDATE_STEP_QUEUE':
             return {

@@ -10,7 +10,7 @@ const initialState = {
     modelPortfolio: OptimizationFormatter.toModelDfFormat(modelPortfolio.model_allocation, l2AssetClassList)
 }
 
-const optimizationReducer = (state = initialState, action) => {
+function optimizationReducer(state = initialState, action) {
     switch (action.type) {
         case 'UPDATE_FUND_LIST':
             return {

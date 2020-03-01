@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 
 const { Text } = Typography;
 
-const FourierDescription = () => {
+function FourierDescription() {
 
     const styles = {
         textStyle: {

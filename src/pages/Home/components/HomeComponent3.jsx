@@ -8,6 +8,7 @@ const HomeComponent3 = () => {
     const styles = {
         containerStyle: {
             paddingTop: '20vh',
+            paddingBottom: '400px',
             backgroundColor: 'white',
             width: '100%',
             paddingLeft: isMobile ? '5vw' : '15vw',

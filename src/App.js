@@ -4,6 +4,7 @@ import HeaderComponent from './components/header/HeaderComponent';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Layout } from 'antd';
 import AppRouter from './routes/AppRouter';
+import FooterComponent from './components/footer/FooterComponent';
 
 console.log(`App is running in ${process.env.NODE_ENV} mode`);
 console.log(process.env.REACT_APP_API_ENDPOINT)
@@ -15,6 +16,7 @@ class App extends React.Component {
                 <Layout >
                     <HeaderComponent />
                     <AppRouter />
+                    <FooterComponent />
                 </Layout>
             </Router >
         );

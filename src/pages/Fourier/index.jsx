@@ -4,9 +4,9 @@ import { isMobile } from 'react-device-detect';
 import FourierDesciption from './FourierDescription';
 
 import FourierSeries from './sketch';
-import {Slider} from 'antd';
+import { Slider } from 'antd';
 
-const Fourier = () => {
+function Fourier() {
     const INITIAL_SERIES_NUM = 4;
     const MAX_SERIES_NUM = 20;
     const STEP_SERIES_NUM = 1;
@@ -36,7 +36,7 @@ const Fourier = () => {
     }
 
     const sliderMarks = {
-        0 : '0',
+        0: '0',
         10: '10',
         20: '20',
     }

@@ -2,7 +2,7 @@ import React from "react";
 import { Row } from "antd";
 import ProjectCard from "./ProjectCard";
 
-const Projects = () => {
+function Projects() {
   const styles = {
     containerStyle: {
       marginTop: "64px",
@@ -35,13 +35,15 @@ const Projects = () => {
           title="Fourier Series"
           alt="fourier cover"
           link="/projects/fourier"
-          description="Visualising the fourier series."
+          bg="/resources/fourier_card_screen.png"
+          description="Visualising the fourier series through a series of periodic curves."
         />
         <ProjectCard
           title="Portfolio Optimization"
           alt="poptimization cover"
           link="/projects/poptimization"
-          description="Obtaining the optimum portfolio through rebalancing of client holdings."
+          bg="/resources/poptimization_card_screen.jpg"
+          description="Obtaining the optimal portfolio through rebalancing of client holdings."
         />
       </Row>
     </div>

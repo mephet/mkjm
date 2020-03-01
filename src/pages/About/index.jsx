@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 
 // const { Title, Text } = Typography;
 
-const About = () => {
+function About() {
 
     const styles = {
         containerStyle: {

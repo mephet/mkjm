@@ -3,7 +3,7 @@ const initialState = {
     viewportHeight: window.innerHeight
 }
 
-const windowReducer = (state = initialState, action) => {
+function windowReducer(state = initialState, action) {
     switch (action.type) {
         case 'UPDATE_VIEWPORT_WIDTH_HEIGHT':
             return {
