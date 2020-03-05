@@ -2,6 +2,7 @@
   "name": "mkjmworld",
   "version": "0.1.0",
   "private": true,
+  "@comment proxy": "http://api:5000",
   "dependencies": {
     "@nivo/bar": "^0.61.1",
     "@nivo/pie": "^0.61.1",
@@ -27,6 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prod": "serve -s build -l 3000",
     "build": "react-scripts build",
     "test": "eslint src",
     "eject": "react-scripts eject",
@@ -36,7 +38,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://api:5000",
   "browserslist": {
     "production": [
       ">0.2%",

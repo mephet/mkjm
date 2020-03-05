@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { isMobile } from "react-device-detect";
-// import AllocationChart from './AllocationChart.jsx';
+import AllocationChart from './AllocationChart.jsx';
 import AllocationBarChart from "./AllocationBarChart.jsx";
-import { sendClientAllocation, test } from "../../controllers/PortfolioRequestController.js";
+import { sendClientAllocation } from "../../controllers/PortfolioRequestController.js";
 
 import { connect } from "react-redux";
 import FundDataConfiguration from "./EditableTables/FundDataConfiguration.jsx";
 import ClientHoldingsConfiguration from "./EditableTables/ClientHoldingsConfiguration.jsx";
 import ModelPortfolioConfiguration from "./EditableTables/ModelPortfolioConfiguration.jsx";
 import { Button, Collapse, Icon, Spin } from "antd";
-import PortfolioStatistic from "./PortfolioStatistic.jsx";
-import { getL2Gaps } from "./Util.js";
+import PortfolioStatistic from "./statistics/PortfolioStatistic.jsx";
+import OptimizedPortfolioStatistic from "./statistics/OptimizedPortfolioStatistic.jsx";
+import { getL2Gaps, getAllocationStatistics, OptimizationFormatter } from "./Util.js";
 
 const { Panel } = Collapse;
 
@@ -27,8 +28,12 @@ const PortfolioOptimization = props => {
       setLoadingOp(false);
     });
   };
+  
+  const gaps = getL2Gaps(clientPortfolio, modelPortfolio, fundList, "Fund Allocation");
 
-  const gaps = getL2Gaps(clientPortfolio, modelPortfolio, fundList)
+  const opOut = allocation ? getAllocationStatistics(allocation) : null;
+  const opGaps = allocation ? getL2Gaps(allocation, modelPortfolio, fundList, "Optimized Allocation") : null;
+  const opPieData = allocation ? OptimizationFormatter.toPieDataFormat(allocation) : null;
 
   const toOptimizer = {
     clientJson: clientPortfolio,
@@ -62,6 +67,7 @@ const PortfolioOptimization = props => {
   return (
     <div style={styles.containerStyle}>
       <PortfolioStatistic gaps={gaps} clientPortfolio={clientPortfolio} />
+      {loadingOp ? <Spin indicator={antIcon} /> : (allocation === null ? null : <OptimizedPortfolioStatistic txns={opOut.txns} aumTurnover={opOut.aumTurnover} gaps={opGaps} />)}
       <Collapse defaultActiveKey={['1']}>
         <Panel header="Client Portfolio" key="1">
           <ClientHoldingsConfiguration />
@@ -77,11 +83,13 @@ const PortfolioOptimization = props => {
       <Button type="primary" onClick={handleResponse}>
         Optimize Portfolio
       </Button>
+
       <div style={styles.graphContainerStyle}>
-        {loadingOp ? <Spin indicator={antIcon} /> : (allocation === null ? null : <AllocationBarChart data={allocation} />)}
+        {loadingOp ? <Spin indicator={antIcon} /> : (allocation ? <AllocationBarChart data={allocation} /> : null)}
       </div>
-      <Button onClick={() => console.log(fundList)}>log</Button>
-      <Button onClick={test}>Test</Button>
+      <div style={styles.graphContainerStyle}>
+        {loadingOp ? <Spin indicator={antIcon} /> : (allocation ? <AllocationChart data={opPieData} /> : null)}
+      </div>
     </div>
   );
 };

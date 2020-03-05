@@ -1,7 +1,7 @@
 import { l2AssetClassList } from './PortfolioSeed.js';
 
 
-export function getL2Gaps(clientJson, modelJson, fundJson) {
+export function getL2Gaps(clientJson, modelJson, fundJson, allocIndex) {
 
     let modelAlloc = [];
     l2AssetClassList.forEach(asset => {
@@ -18,7 +18,7 @@ export function getL2Gaps(clientJson, modelJson, fundJson) {
             if (c["Fund Name"] === f["Fund Name"]) {
                 l2AssetClassList.forEach(a => {
                     let currVal = clientAlloc[a];
-                    clientAlloc[a] = currVal + c["Fund Allocation"] * f[a];
+                    clientAlloc[a] = currVal + c[allocIndex] * f[a];
                 })
             }
         })
@@ -32,12 +32,38 @@ function calculateGapDiff(clientAlloc, modelAlloc, l2AssetClassList) {
     l2AssetClassList.forEach(asset => {
         outputAlloc[asset] = Math.abs(clientAlloc[asset] - modelAlloc[asset]);
     })
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (acc, curr) => acc + curr;
     let gap = Object.values(outputAlloc).reduce(reducer);
     return gap;
 }
 
+export function getAllocationStatistics(allocationOutput) {
+    if (allocationOutput) {
+        const txns = allocationOutput.filter(o => o["Txn Count"] > 0).length;
+        const optimizedList = allocationOutput.filter(o => o["Optimized Allocation"] > 0)
+        const aumTurnover = allocationOutput.filter(o => o["Allocation delta"] !== 0)
+            .map(f => f["Allocation delta"])
+            .reduce((acc, curr) => Math.abs(acc) + Math.abs(curr))
+        return {
+            txns,
+            optimizedList,
+            aumTurnover
+        }
+    }
+    return null;
+}
+
 export class OptimizationFormatter {
+    static toPieDataFormat(outputAllocation) {
+        return outputAllocation.map((o, idx) => {
+            return {
+                "id": o["Fund Name"],
+                "label": o["Fund Name"],
+                "value": Number((o["Optimized Allocation"] * 100).toFixed(2))
+            }
+        })
+    }
+
     static toClientDfFormat(clientHoldings) {
         return clientHoldings.map((holding, idx) => {
             return {
