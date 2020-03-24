@@ -31,6 +31,7 @@ const Home = () => {
         <div style={styles.containerStyle}>
             <Row>
                 <Col md={{ span: 18 }} sm={{ span: 24 }} style={styles.mainPageContainer} >
+
                     <HomeComponent1 />
                 </Col>
             </Row>
